@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Login — Elexys Technologies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0e1a;
+  --card:#111827;
+  --border:#1e2d45;
+  --accent:#00d4ff;
+  --accent2:#7c3aed;
+  --text:#e2e8f0;
+  --muted:#64748b;
+  --success:#10b981;
+  --error:#f43f5e;
+}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Space Grotesk',sans-serif;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+}
+/* animated background */
+.bg-grid{
+  position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,255,.03) 1px,transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;z-index:0;
+}
+.bg-glow{
+  position:fixed;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,.15),transparent 70%);
+  top:-100px;right:-100px;
+  pointer-events:none;z-index:0;
+  animation:pulse 6s ease-in-out infinite;
+}
+.bg-glow2{
+  position:fixed;
+  width:400px;height:400px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,255,.12),transparent 70%);
+  bottom:-80px;left:-80px;
+  pointer-events:none;z-index:0;
+  animation:pulse 8s ease-in-out infinite reverse;
+}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.1);opacity:1}}
+
+.container{
+  position:relative;z-index:1;
+  width:100%;max-width:460px;
+  padding:1.5rem;
+}
+.logo{
+  text-align:center;
+  margin-bottom:2rem;
+}
+.logo a{
+  text-decoration:none;
+  display:inline-flex;flex-direction:column;align-items:center;gap:4px;
+}
+.logo-name{
+  font-family:'Orbitron',sans-serif;
+  font-size:1.6rem;font-weight:900;
+  letter-spacing:.1em;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.logo-sub{font-size:.72rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:2.5rem 2rem;
+  box-shadow:0 25px 60px rgba(0,0,0,.5);
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);
+}
+
+/* Tabs */
+.tabs{display:flex;gap:.5rem;margin-bottom:2rem;background:#0a0e1a;border-radius:12px;padding:4px}
+.tab-btn{
+  flex:1;padding:.65rem;border:none;background:transparent;
+  color:var(--muted);font-family:'Space Grotesk',sans-serif;
+  font-size:.9rem;font-weight:500;border-radius:9px;
+  cursor:pointer;transition:all .25s;
+}
+.tab-btn.active{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;
+}
+.tab-btn:hover:not(.active){color:var(--text)}
+
+/* Forms */
+.form-section{display:none}
+.form-section.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.form-title{font-size:1.3rem;font-weight:600;margin-bottom:.3rem}
+.form-desc{font-size:.83rem;color:var(--muted);margin-bottom:1.8rem}
+
+.input-group{margin-bottom:1.2rem;position:relative}
+.input-group label{
+  display:block;font-size:.78rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.08em;
+  color:var(--accent);margin-bottom:.5rem;
+}
+.input-group input,
+.input-group select{
+  width:100%;padding:.8rem 1rem;
+  background:#0d1421;border:1px solid var(--border);
+  border-radius:10px;color:var(--text);
+  font-family:'Space Grotesk',sans-serif;font-size:.95rem;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+  appearance:none;
+}
+.input-group input:focus,
+.input-group select:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(0,212,255,.1);
+}
+.input-group select option{background:#111827}
+
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+.btn-submit{
+  width:100%;padding:.9rem;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border:none;border-radius:12px;
+  color:#fff;font-family:'Space Grotesk',sans-serif;
+  font-size:1rem;font-weight:600;letter-spacing:.03em;
+  cursor:pointer;margin-top:.5rem;
+  transition:opacity .2s,transform .1s;
+  position:relative;overflow:hidden;
+}
+.btn-submit:hover{opacity:.9}
+.btn-submit:active{transform:scale(.98)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed}
+
+.divider{
+  display:flex;align-items:center;gap:1rem;
+  margin:1.5rem 0;color:var(--muted);font-size:.82rem;
+}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.wa-btn{
+  width:100%;padding:.85rem;
+  background:transparent;
+  border:1px solid #25d366;
+  border-radius:12px;color:#25d366;
+  font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:600;
+  cursor:pointer;text-decoration:none;display:flex;align-items:center;
+  justify-content:center;gap:.6rem;transition:background .2s,color .2s;
+}
+.wa-btn:hover{background:#25d366;color:#fff}
+
+.msg{
+  padding:.8rem 1rem;border-radius:10px;
+  font-size:.85rem;margin-top:1rem;
+  display:none;animation:fadeIn .3s ease;
+}
+.msg.success{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:var(--success)}
+.msg.error{background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.3);color:var(--error)}
+
+.back-link{
+  text-align:center;margin-top:1.5rem;
+  font-size:.83rem;color:var(--muted);
+}
+.back-link a{color:var(--accent);text-decoration:none;font-weight:600}
+.back-link a:hover{text-decoration:underline}
+
+.spinner{
+  display:inline-block;width:16px;height:16px;
+  border:2px solid rgba(255,255,255,.3);
+  border-top-color:#fff;border-radius:50%;
+  animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.logged-in-card{
+  text-align:center;display:none;
+  animation:fadeIn .4s ease;
+}
+.logged-in-card .avatar{
+  width:70px;height:70px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;margin:0 auto 1rem;
+}
+.logged-in-card h2{font-size:1.2rem;margin-bottom:.3rem}
+.logged-in-card p{color:var(--muted);font-size:.85rem;margin-bottom:1.5rem}
+.btn-logout{
+  padding:.7rem 2rem;background:transparent;
+  border:1px solid var(--error);border-radius:10px;
+  color:var(--error);font-family:'Space Grotesk',sans-serif;
+  font-size:.9rem;font-weight:600;cursor:pointer;
+  transition:background .2s,color .2s;
+}
+.btn-logout:hover{background:var(--error);color:#fff}
+.btn-home{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.7rem 2rem;margin-right:.5rem;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border:none;border-radius:10px;color:#fff;
+  font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;
+  text-decoration:none;cursor:pointer;
+  transition:opacity .2s;
+}
+.btn-home:hover{opacity:.9}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+<div class="bg-glow2"></div>
+
+<div class="container">
+  <div class="logo">
+    <a href="index.html">
+      <div class="logo-name">⚡ ELEXYS</div>
+      <div class="logo-sub">Technologies</div>
+    </a>
+  </div>
+
+  <div class="card">
+    <!-- Already logged in state -->
+    <div class="logged-in-card" id="loggedInCard">
+      <div class="avatar">👤</div>
+      <h2 id="welcomeName">Welcome back!</h2>
+      <p id="welcomeEmail">you@email.com</p>
+      <div style="display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap">
+        <a href="index.html" class="btn-home">🏠 Go to Website</a>
+        <button class="btn-logout" id="logoutBtn">Sign Out</button>
+      </div>
+    </div>
+
+    <!-- Auth forms -->
+    <div id="authForms">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="login">Sign In</button>
+        <button class="tab-btn" data-tab="register">Register</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div class="form-section active" id="loginSection">
+        <div class="form-title">Welcome Back 👋</div>
+        <div class="form-desc">Sign in to track your orders and get personalized support.</div>
+        <div class="input-group">
+          <label>Email Address</label>
+          <input type="email" id="loginEmail" placeholder="your@email.com" autocomplete="email"/>
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password"/>
+        </div>
+        <button class="btn-submit" id="loginBtn">Sign In</button>
+        <div class="msg" id="loginMsg"></div>
+        <div class="divider">or connect via</div>
+        <a class="wa-btn" href="https://wa.me/918796168099?text=Hi%20Prof.%20M.D.%20Sk%2C%20I%20need%20help%20with%20my%20account." target="_blank">
+          💬 Contact on WhatsApp
+        </a>
+      </div>
+
+      <!-- REGISTER -->
+      <div class="form-section" id="registerSection">
+        <div class="form-title">Create Account ⚡</div>
+        <div class="form-desc">Register to place orders, track kits, and access full support.</div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>First Name</label>
+            <input type="text" id="regFirstName" placeholder="Ravi" autocomplete="given-name"/>
+          </div>
+          <div class="input-group">
+            <label>Last Name</label>
+            <input type="text" id="regLastName" placeholder="Sharma" autocomplete="family-name"/>
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Email Address</label>
+          <input type="email" id="regEmail" placeholder="your@email.com" autocomplete="email"/>
+        </div>
+        <div class="input-group">
+          <label>WhatsApp / Phone Number</label>
+          <input type="tel" id="regPhone" placeholder="+91 98765 43210" autocomplete="tel"/>
+        </div>
+        <div class="input-group">
+          <label>College / Institution</label>
+          <input type="text" id="regCollege" placeholder="e.g. MIT Pune"/>
+        </div>
+        <div class="input-group">
+          <label>Branch / Course</label>
+          <select id="regBranch">
+            <option value="">-- Select Branch --</option>
+            <option>Electrical Engineering</option>
+            <option>Electronics Engineering</option>
+            <option>Mechatronics Engineering</option>
+            <option>Instrumentation Engineering</option>
+            <option>Telecommunication Engineering</option>
+            <option>B.Tech / M.Tech / M.E.</option>
+            <option>Diploma (Electronics)</option>
+            <option>Diploma (Electrical)</option>
+            <option>BSc / MSc</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="regPassword" placeholder="Create a strong password" autocomplete="new-password"/>
+        </div>
+        <button class="btn-submit" id="registerBtn">Create Account</button>
+        <div class="msg" id="registerMsg"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="back-link">
+    <a href="index.html">← Back to Elexys Website</a>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  increment,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC97I-QSoDqSLfUR3Vt6gYSM5VrXAJb2G4",
+  authDomain: "elexys-technologies.firebaseapp.com",
+  projectId: "elexys-technologies",
+  storageBucket: "elexys-technologies.firebasestorage.app",
+  messagingSenderId: "1002855081911",
+  appId: "1:1002855081911:web:6bafab1a4fea559ff9ea32",
+  measurementId: "G-JZCYP7XRPH"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ── Visitor counter ──────────────────────────────
+async function countVisitor(){
+  try{
+    const ref = doc(db,'stats','visitors');
+    await updateDoc(ref,{count:increment(1),lastVisit:serverTimestamp()}).catch(async()=>{
+      await setDoc(ref,{count:1,lastVisit:serverTimestamp()});
+    });
+  }catch(e){}
+}
+countVisitor();
+
+// ── Tab switching ────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.form-section').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab+'Section').classList.add('active');
+  });
+});
+
+// ── Auth state ───────────────────────────────────
+onAuthStateChanged(auth, user=>{
+  if(user){
+    document.getElementById('authForms').style.display='none';
+    document.getElementById('loggedInCard').style.display='block';
+    document.getElementById('welcomeName').textContent = user.displayName || 'Welcome!';
+    document.getElementById('welcomeEmail').textContent = user.email;
+  } else {
+    document.getElementById('authForms').style.display='block';
+    document.getElementById('loggedInCard').style.display='none';
+  }
+});
+
+// ── Logout ───────────────────────────────────────
+document.getElementById('logoutBtn').addEventListener('click',()=>signOut(auth));
+
+// ── Show message helper ──────────────────────────
+function showMsg(id,type,text){
+  const el=document.getElementById(id);
+  el.className='msg '+type;
+  el.textContent=text;
+  el.style.display='block';
+}
+function setLoading(btnId,loading){
+  const btn=document.getElementById(btnId);
+  btn.disabled=loading;
+  btn.innerHTML = loading ? '<span class="spinner"></span> Please wait…' : btn.dataset.label;
+}
+
+// store default labels
+document.getElementById('loginBtn').dataset.label='Sign In';
+document.getElementById('registerBtn').dataset.label='Create Account';
+
+// ── LOGIN ────────────────────────────────────────
+document.getElementById('loginBtn').addEventListener('click', async()=>{
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPassword').value;
+  if(!email||!pass){showMsg('loginMsg','error','Please fill in all fields.');return;}
+  setLoading('loginBtn',true);
+  try{
+    const cred = await signInWithEmailAndPassword(auth,email,pass);
+    // update last login in Firestore
+    await updateDoc(doc(db,'users',cred.user.uid),{
+      lastLogin: serverTimestamp()
+    }).catch(()=>{});
+    showMsg('loginMsg','success','Signed in! Redirecting…');
+    setTimeout(()=>{ window.location.href='index.html'; },1200);
+  }catch(e){
+    const msgs={
+      'auth/user-not-found':'No account found with this email.',
+      'auth/wrong-password':'Incorrect password. Try again.',
+      'auth/invalid-email':'Please enter a valid email address.',
+      'auth/too-many-requests':'Too many attempts. Try again later.'
+    };
+    showMsg('loginMsg','error', msgs[e.code]||'Login failed: '+e.message);
+    setLoading('loginBtn',false);
+  }
+});
+
+// ── REGISTER ─────────────────────────────────────
+document.getElementById('registerBtn').addEventListener('click', async()=>{
+  const firstName = document.getElementById('regFirstName').value.trim();
+  const lastName  = document.getElementById('regLastName').value.trim();
+  const email     = document.getElementById('regEmail').value.trim();
+  const phone     = document.getElementById('regPhone').value.trim();
+  const college   = document.getElementById('regCollege').value.trim();
+  const branch    = document.getElementById('regBranch').value;
+  const pass      = document.getElementById('regPassword').value;
+
+  if(!firstName||!lastName||!email||!phone||!pass){
+    showMsg('registerMsg','error','Please fill in all required fields.');return;
+  }
+  if(pass.length<6){showMsg('registerMsg','error','Password must be at least 6 characters.');return;}
+
+  setLoading('registerBtn',true);
+  try{
+    const cred = await createUserWithEmailAndPassword(auth,email,pass);
+    const fullName = firstName+' '+lastName;
+
+    // update Firebase Auth profile
+    await updateProfile(cred.user,{displayName:fullName});
+
+    // save full user data to Firestore /users/{uid}
+    await setDoc(doc(db,'users',cred.user.uid),{
+      uid: cred.user.uid,
+      name: fullName,
+      firstName, lastName,
+      email,
+      phone,          // WhatsApp / student contact no
+      college,
+      branch,
+      role: 'customer',
+      registeredAt: serverTimestamp(),
+      lastLogin: serverTimestamp()
+    });
+
+    showMsg('registerMsg','success','Account created! Signing you in…');
+    setTimeout(()=>{ window.location.href='index.html'; },1400);
+  }catch(e){
+    const msgs={
+      'auth/email-already-in-use':'This email is already registered. Please sign in.',
+      'auth/invalid-email':'Invalid email address.',
+      'auth/weak-password':'Password is too weak.'
+    };
+    showMsg('registerMsg','error', msgs[e.code]||'Registration failed: '+e.message);
+    setLoading('registerBtn',false);
+  }
+});
+</script>
+</body>
+</html>
