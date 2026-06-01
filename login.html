@@ -154,7 +154,7 @@ body{
 
 <div class="auth-wrapper">
   <div class="auth-logo">
-    <a href="dream-solar-energies.html">
+    <a href="index.html">
       <div class="logo-sun">☀️</div>
       <span class="logo-name-text">Dream Solar Energies</span>
       <span class="logo-sub-text">Power Your Future</span>
@@ -255,7 +255,7 @@ body{
   </div>
 
   <div class="back-link">
-    <a href="dream-solar-energies.html">← Back to Dream Solar Energies</a>
+    <a href="index.html">← Back to Dream Solar Energies</a>
   </div>
 </div>
 
@@ -270,12 +270,13 @@ import { getFirestore, doc, setDoc, getDoc, serverTimestamp }
 
 // ── FIREBASE CONFIG ── Replace with your project credentials ──
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBNQSVzXZBtvWQO8RNHOk_ishTpqLLLIrM",
+  authDomain: "dream-solar.firebaseapp.com",
+  projectId: "dream-solar",
+  storageBucket: "dream-solar.firebasestorage.app",
+  messagingSenderId: "199990013532",
+  appId: "1:199990013532:web:36fd0adf30758694b40099",
+  measurementId: "G-GM68FKG2H3"
 };
 // ─────────────────────────────────────────────────────────────
 
@@ -288,7 +289,7 @@ const gProvider = new GoogleAuthProvider();
 onAuthStateChanged(auth, user => {
   if (user) {
     const ret = new URLSearchParams(window.location.search).get('redirect');
-    window.location.href = ret || 'dream-solar-energies.html';
+    window.location.href = ret || 'index.html';
   }
 });
 
@@ -340,7 +341,7 @@ window.doLogin = async () => {
     const cred = await signInWithEmailAndPassword(auth, email, pw);
     await saveUserProfile(cred.user);
     showAlert('Welcome back! Redirecting…','success');
-    setTimeout(() => window.location.href = 'dream-solar-energies.html', 1200);
+    setTimeout(() => window.location.href = 'index.html', 1200);
   } catch(e) {
     showAlert(friendlyError(e.code));
     setLoading('loginBtn','loginSpinner','loginBtnText', false);
@@ -362,7 +363,7 @@ window.doRegister = async () => {
     await updateProfile(cred.user, { displayName: name });
     await saveUserProfile(cred.user, { name, phone, city });
     showAlert('Account created! Welcome 🎉','success');
-    setTimeout(() => window.location.href = 'dream-solar-energies.html', 1400);
+    setTimeout(() => window.location.href = 'index.html', 1400);
   } catch(e) {
     showAlert(friendlyError(e.code));
     setLoading('regBtn','regSpinner','regBtnText', false);
@@ -375,7 +376,7 @@ window.doGoogleLogin = async () => {
     const cred = await signInWithPopup(auth, gProvider);
     await saveUserProfile(cred.user);
     showAlert('Signed in with Google! Redirecting…','success');
-    setTimeout(() => window.location.href = 'dream-solar-energies.html', 1200);
+    setTimeout(() => window.location.href = 'index.html', 1200);
   } catch(e) {
     if(e.code !== 'auth/popup-closed-by-user') showAlert(friendlyError(e.code));
   }
