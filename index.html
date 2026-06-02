@@ -105,21 +105,18 @@
     text-decoration: none;
   }
   .logo-icon {
-    width: 46px; height: 46px;
-    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem;
-    box-shadow: 0 4px 14px rgba(244,168,32,.4);
+    height: 58px;
+    width: auto;
     flex-shrink: 0;
+    display: flex; align-items: center;
   }
-  .logo-text { display: flex; flex-direction: column; }
-  .logo-name {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700; font-size: 1.12rem;
-    color: var(--white); line-height: 1.1;
+  .logo-icon img {
+    height: 58px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(244,168,32,.35)) brightness(1.05);
   }
-  .logo-tagline { font-size: .68rem; font-weight: 500; color: var(--gold-lt); letter-spacing: .08em; text-transform: uppercase; }
+  .logo-text { display: none; }
 
   .nav-links {
     display: flex; align-items: center; gap: 36px;
@@ -229,6 +226,60 @@
   .stat-num span { color: var(--gold); }
   .stat-label { font-size: .82rem; color: rgba(255,255,255,.5); margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+
+  /* ── HERO SLIDESHOW ── */
+  .hero-slideshow {
+    position: absolute; inset: 0; z-index: 0;
+    overflow: hidden;
+  }
+  .hero-slide {
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    background-size: cover;
+    background-position: center;
+  }
+  .hero-slide.active { opacity: 1; }
+  .hero-slide::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, rgba(11,23,40,0.82) 0%, rgba(11,23,40,0.55) 60%, rgba(11,23,40,0.3) 100%);
+  }
+  .hero-slide-dots {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px; z-index: 10;
+  }
+  .hero-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.3); border: none; cursor: pointer;
+    transition: all 0.3s; padding: 0;
+  }
+  .hero-dot.active { background: var(--gold); width: 24px; border-radius: 4px; }
+
+  /* ── WHATSAPP FLOATING ── */
+  .whatsapp-float {
+    position: fixed; bottom: 90px; right: 28px; z-index: 991;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 20px rgba(37,211,102,.5);
+    text-decoration: none; font-size: 1.55rem;
+    transition: var(--transition);
+    animation: waFloat 3s ease-in-out infinite;
+  }
+  .whatsapp-float:hover { transform: scale(1.12); box-shadow: 0 10px 28px rgba(37,211,102,.65); animation: none; }
+  @keyframes waFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* ── WHATSAPP INLINE BUTTON ── */
+  .btn-whatsapp {
+    background: #25D366;
+    color: #fff;
+    box-shadow: 0 6px 24px rgba(37,211,102,.35);
+  }
+  .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(37,211,102,.5); }
 
   /* ── WHY SOLAR ── */
   #why {
@@ -676,10 +727,8 @@
 <nav id="navbar">
   <div class="container nav-inner">
     <a href="#hero" class="logo">
-      <div class="logo-icon">☀️</div>
-      <div class="logo-text">
-        <span class="logo-name">Dream Solar Energies</span>
-        <span class="logo-tagline">Power Your Future</span>
+      <div class="logo-icon">
+        <img src="logo_1.png" alt="Dream Solar Energies Logo" />
       </div>
     </a>
     <ul class="nav-links">
@@ -715,6 +764,14 @@
 
 <!-- ═══════════════ HERO ═══════════════ -->
 <section id="hero">
+  <!-- Slideshow Background -->
+  <div class="hero-slideshow" id="heroSlideshow">
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=1600&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=1600&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1548149490-e1c91a32e58e?w=1600&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600&q=80')"></div>
+  </div>
   <div class="hero-bg"></div>
   <div class="grid-lines"></div>
   <div class="sun-circle"></div>
@@ -722,7 +779,7 @@
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge">
-        <span></span> Trusted Solar Partner Since 2015
+        <span></span> Trusted Solar Partner — Malegaon, Nashik
       </div>
       <h1 class="hero-title">
         Harness the Sun,<br><em>Transform Your Life</em>
@@ -732,15 +789,16 @@
       </p>
       <div class="hero-actions">
         <a href="#contact" class="btn btn-primary">Get a Free Quote ➔</a>
+        <a href="https://wa.me/918796168099?text=Hello%20Dream%20Solar%20Energies%2C%20I%20am%20interested%20in%20solar%20installation." target="_blank" class="btn btn-whatsapp">💬 WhatsApp Us</a>
         <a href="#process" class="btn btn-outline">See How It Works</a>
       </div>
       <div class="hero-stats">
         <div class="stat-item">
-          <div class="stat-num">5,200<span>+</span></div>
+          <div class="stat-num">500<span>+</span></div>
           <div class="stat-label">Installations</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">$48<span>M</span></div>
+          <div class="stat-num">₹2<span>Cr+</span></div>
           <div class="stat-label">Customer Savings</div>
         </div>
         <div class="stat-item">
@@ -753,6 +811,14 @@
         </div>
       </div>
     </div>
+  </div>
+  <!-- Slide Dots -->
+  <div class="hero-slide-dots" id="heroDotsContainer">
+    <button class="hero-dot active" onclick="goToSlide(0)"></button>
+    <button class="hero-dot" onclick="goToSlide(1)"></button>
+    <button class="hero-dot" onclick="goToSlide(2)"></button>
+    <button class="hero-dot" onclick="goToSlide(3)"></button>
+    <button class="hero-dot" onclick="goToSlide(4)"></button>
   </div>
 </section>
 
@@ -782,7 +848,7 @@
             <div class="why-point-icon">💰</div>
             <div class="why-point-text">
               <h4>Slash Your Energy Bills</h4>
-              <p>Our customers save an average of $1,800 per year on electricity — that's real money back in your pocket every month.</p>
+              <p>Our customers save an average of ₹1,50,000 per year on electricity — that's real money back in your pocket every month.</p>
             </div>
           </div>
           <div class="why-point">
@@ -1068,7 +1134,7 @@
       </div>
       <div class="testimonial-card">
         <div class="stars">★★★★★</div>
-        <blockquote>"As a business owner, I was skeptical about the ROI. Dream Solar showed me a detailed financial breakdown and delivered exactly what they promised. We break even in 4 years and have already saved $22,000."</blockquote>
+        <blockquote>"As a business owner, I was skeptical about the ROI. Dream Solar showed me a detailed financial breakdown and delivered exactly what they promised. We break even in 4 years and have already saved ₹18,48,000."</blockquote>
         <div class="reviewer">
           <div class="reviewer-avatar">SL</div>
           <div>
@@ -1103,8 +1169,8 @@
     <div class="calc-wrap">
       <div class="calc-row">
         <div class="form-group">
-          <label>Monthly Electricity Bill ($)</label>
-          <input type="number" id="bill" placeholder="e.g. 200" min="0" />
+          <label>Monthly Electricity Bill (₹)</label>
+          <input type="number" id="bill" placeholder="e.g. 2000" min="0" />
         </div>
         <div class="form-group">
           <label>Property Type</label>
@@ -1130,7 +1196,7 @@
       <button class="btn btn-primary" onclick="calcSavings()">Calculate My Savings ➔</button>
       <div class="calc-result" id="calcResult" style="display:none;margin-top:28px;">
         <div class="result-label">Estimated Annual Savings</div>
-        <div class="result-num" id="resultNum">$0</div>
+        <div class="result-num" id="resultNum">₹0</div>
         <div class="result-sub" id="resultSub">Over 25 years: — | Est. System Size: —</div>
       </div>
     </div>
@@ -1160,7 +1226,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">What financing options are available? <span class="arrow">▼</span></div>
-        <div class="faq-a"><div class="faq-a-inner">We offer several flexible financing options: cash purchase (lowest total cost), solar loans with $0 down starting from 2.99% APR, solar leases with no upfront cost, and Power Purchase Agreements (PPAs) where you pay only for the energy generated. Our financial advisors will help you find the best option for your situation.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">We offer several flexible financing options: cash purchase (lowest total cost), solar loans with ₹0 down starting from 2.99% APR, solar leases with no upfront cost, and Power Purchase Agreements (PPAs) where you pay only for the energy generated. Our financial advisors will help you find the best option for your situation.</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">How do I claim the federal solar tax credit? <span class="arrow">▼</span></div>
@@ -1249,22 +1315,36 @@
           <div class="contact-item">
             <div class="contact-item-icon">📞</div>
             <div class="contact-item-text">
-              <strong>Phone / WhatsApp</strong>
+              <strong>Phone</strong>
               <span>+91 87961 68099 (Daily, 9am–8pm)</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon" style="background:linear-gradient(135deg,#25D366,#128C7E)">💬</div>
+            <div class="contact-item-text">
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/918796168099?text=Hello%20Dream%20Solar%20Energies%2C%20I%20am%20interested%20in%20solar%20installation." target="_blank" style="color:var(--gold-dk);font-weight:600;font-size:.9rem;">Chat on WhatsApp →</a>
             </div>
           </div>
           <div class="contact-item">
             <div class="contact-item-icon">✉️</div>
             <div class="contact-item-text">
               <strong>Email</strong>
-              <span>dreamsolar@gmail.com</span>
+              <span>dream.solar.energies@gmail.com</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📧</div>
+            <div class="contact-item-text">
+              <strong>Installer Email</strong>
+              <span>dream.solar.installer@gmail.com</span>
             </div>
           </div>
           <div class="contact-item">
             <div class="contact-item-icon">📍</div>
             <div class="contact-item-text">
               <strong>Office Address</strong>
-              <span>New Islampura, Malegaon, Dist. Nashik, Maharashtra</span>
+              <span>Daregaon, Zainab Nagar, Mustafa Park, Near Ateek Masjid, Malegaon, Dist. Nashik, Maharashtra</span>
             </div>
           </div>
           <div class="contact-item">
@@ -1321,10 +1401,8 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#hero" class="logo">
-          <div class="logo-icon">☀️</div>
-          <div class="logo-text">
-            <span class="logo-name">Dream Solar Energies</span>
-            <span class="logo-tagline">Power Your Future</span>
+          <div class="logo-icon">
+            <img src="logo_1.png" alt="Dream Solar Energies" style="height:70px;width:auto;" />
           </div>
         </a>
         <p>Providing premium solar solutions to homes and businesses in Malegaon, Nashik, and across Maharashtra. Certified, trusted, and committed to a cleaner planet.</p>
@@ -1362,15 +1440,16 @@
         <h4>Contact</h4>
         <ul>
           <li><a href="tel:+918796168099">📞 +91 87961 68099</a></li>
-          <li><a href="mailto:dreamsolar@gmail.com">✉️ dreamsolar@gmail.com</a></li>
-          <li><a href="#contact">📍 New Islampura, Malegaon</a></li>
+          <li><a href="mailto:dream.solar.energies@gmail.com">✉️ dream.solar.energies@gmail.com</a></li>
+          <li><a href="mailto:dream.solar.installer@gmail.com">📧 dream.solar.installer@gmail.com</a></li>
+          <li><a href="#contact">📍 Daregaon, Zainab Nagar, Malegaon</a></li>
           <li><a href="#contact">Dist. Nashik, Maharashtra</a></li>
           <li><a href="#contact">🕐 9 AM – 8 PM Daily</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Dream Solar Energies. Owner: Er. Moin Hamdani. New Islampura, Malegaon, Dist. Nashik, Maharashtra. All rights reserved.</p>
+      <p>© 2026 Dream Solar Energies. Owner: Er. Moin Hamdani. Daregaon, Zainab Nagar, Mustafa Park, Near Ateek Masjid, Malegaon, Dist. Nashik, Maharashtra. All rights reserved.</p>
       <div class="cert-badges">
         <span class="cert-badge">NABCEP Certified</span>
         <span class="cert-badge">BBB A+</span>
@@ -1381,11 +1460,33 @@
   </div>
 </footer>
 
+<!-- WhatsApp Float Button -->
+<a href="https://wa.me/918796168099?text=Hello%20Dream%20Solar%20Energies%2C%20I%20am%20interested%20in%20solar%20installation." target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">💬</a>
+
 <!-- Back to Top -->
 <button id="back-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
 
 <!-- ═══════════════ JAVASCRIPT ═══════════════ -->
 <script>
+  /* Hero Slideshow */
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+
+  function goToSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  function nextSlide() {
+    goToSlide((currentSlide + 1) % slides.length);
+  }
+
+  setInterval(nextSlide, 4500);
+
   /* NAV scroll */
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -1431,8 +1532,8 @@
     const numEl       = document.getElementById('resultNum');
     const subEl       = document.getElementById('resultSub');
 
-    numEl.textContent = '$' + Math.round(savings).toLocaleString();
-    subEl.textContent = `Over 25 years: $${Math.round(over25).toLocaleString()} | Est. System Size: ${sysKW.toFixed(1)} kW`;
+    numEl.textContent = '₹' + Math.round(savings * 84).toLocaleString();
+    subEl.textContent = `Over 25 years: ₹${Math.round(over25 * 84).toLocaleString()} | Est. System Size: ${sysKW.toFixed(1)} kW`;
     resultEl.style.display = 'block';
     resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
