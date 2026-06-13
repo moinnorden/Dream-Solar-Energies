@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Admin Dashboard – Dream Solar Energies</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#F4A820;--gold-lt:#FBCF6A;--gold-dk:#C07D0A;
+  --navy:#0B1728;--navy-mid:#122240;--navy-lt:#1A3058;
+  --sky:#2B8FD4;--white:#FAFCFF;--off:#F0F4FA;
+  --text:#1A2540;--muted:#5A6A88;--border:#E4EAF4;
+  --success:#10b981;--warning:#f59e0b;--error:#ef4444;--info:#6366f1;
+  --sidebar:260px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--off);color:var(--text);min-height:100vh;display:flex;}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sidebar);min-height:100vh;
+  background:linear-gradient(180deg,var(--navy) 0%,var(--navy-mid) 100%);
+  display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;
+  z-index:100;transition:.3s;
+}
+.sidebar-logo{padding:28px 24px;border-bottom:1px solid rgba(255,255,255,.07);}
+.sidebar-logo a{text-decoration:none;display:flex;align-items:center;gap:12px;}
+.s-logo-icon{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-lt));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.s-logo-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--white);line-height:1.1;}
+.s-logo-sub{font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;}
+.sidebar-nav{flex:1;padding:16px 12px;overflow-y:auto;}
+.nav-section-label{font-size:.68rem;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:.14em;text-transform:uppercase;padding:16px 12px 8px;}
+.nav-item{
+  display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;
+  color:rgba(255,255,255,.55);text-decoration:none;font-size:.92rem;font-weight:500;
+  cursor:pointer;transition:.2s;margin-bottom:2px;border:none;background:none;width:100%;text-align:left;
+}
+.nav-item:hover{background:rgba(255,255,255,.06);color:var(--white);}
+.nav-item.active{background:linear-gradient(135deg,rgba(244,168,32,.18),rgba(244,168,32,.08));color:var(--gold);border:1px solid rgba(244,168,32,.2);}
+.nav-item .nav-icon{font-size:1.1rem;width:22px;text-align:center;flex-shrink:0;}
+.nav-badge{margin-left:auto;background:var(--gold);color:var(--navy);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:100px;}
+.sidebar-footer{padding:16px 12px;border-top:1px solid rgba(255,255,255,.07);}
+.admin-profile{display:flex;align-items:center;gap:10px;padding:10px 12px;}
+.admin-av{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-lt));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem;color:var(--navy);}
+.admin-name{font-size:.85rem;font-weight:600;color:var(--white);}
+.admin-role{font-size:.72rem;color:rgba(255,255,255,.4);}
+.btn-logout{width:100%;margin-top:8px;padding:10px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:none;color:rgba(255,255,255,.5);font-family:'DM Sans',sans-serif;font-size:.85rem;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-logout:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.3);color:#fca5a5;}
+
+/* ── MAIN CONTENT ── */
+.main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;min-height:100vh;}
+.topbar{
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:16px 28px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(11,23,40,.04);
+}
+.topbar-left{display:flex;align-items:center;gap:16px;}
+.hamburger-admin{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger-admin span{width:22px;height:2px;background:var(--text);border-radius:2px;display:block;}
+.page-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--text);}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.topbar-badge{background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:var(--navy);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:700;}
+.notif-btn{width:36px;height:36px;border-radius:10px;background:var(--off);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;position:relative;}
+.notif-dot{position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--error);border:2px solid var(--white);}
+
+.content{padding:28px;flex:1;}
+
+/* ── PANELS ── */
+.panel{display:none;}
+.panel.active{display:block;}
+
+/* ── STATS ROW ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:28px;}
+.stat-card{
+  background:var(--white);border-radius:18px;padding:24px;
+  border:1px solid var(--border);position:relative;overflow:hidden;
+  transition:.25s;
+}
+.stat-card:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(11,23,40,.08);}
+.stat-card::after{content:'';position:absolute;top:0;right:0;width:80px;height:80px;border-radius:0 18px 0 100%;opacity:.08;}
+.stat-card.gold::after{background:var(--gold);}
+.stat-card.sky::after{background:var(--sky);}
+.stat-card.green::after{background:var(--success);}
+.stat-card.purple::after{background:var(--info);}
+.stat-icon{font-size:1.8rem;margin-bottom:12px;}
+.stat-label{font-size:.8rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+.stat-value{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--text);margin:4px 0;}
+.stat-change{font-size:.8rem;font-weight:600;}
+.stat-change.up{color:var(--success);}
+.stat-change.down{color:var(--error);}
+
+/* ── TABLE ── */
+.card{background:var(--white);border-radius:18px;border:1px solid var(--border);overflow:hidden;margin-bottom:24px;}
+.card-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.card-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--text);}
+.card-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.search-input{padding:8px 14px;border:1px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;color:var(--text);background:var(--off);width:220px;transition:border-color .2s;}
+.search-input:focus{border-color:var(--gold);}
+.filter-select{padding:8px 12px;border:1px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.85rem;background:var(--off);color:var(--text);outline:none;cursor:pointer;}
+.btn-sm{padding:8px 16px;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:.2s;display:flex;align-items:center;gap:6px;}
+.btn-sm-gold{background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:var(--navy);}
+.btn-sm-gold:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(244,168,32,.35);}
+.btn-sm-outline{background:none;border:1.5px solid var(--border);color:var(--muted);}
+.btn-sm-outline:hover{border-color:var(--sky);color:var(--sky);}
+.btn-sm-danger{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--error);}
+.btn-sm-danger:hover{background:rgba(239,68,68,.2);}
+
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:.88rem;}
+thead tr{background:var(--off);}
+th{padding:12px 16px;text-align:left;font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;}
+td{padding:14px 16px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(244,168,32,.03);}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.75rem;font-weight:700;}
+.badge-new{background:rgba(16,185,129,.12);color:#059669;}
+.badge-progress{background:rgba(245,158,11,.12);color:#d97706;}
+.badge-done{background:rgba(99,102,241,.12);color:#6366f1;}
+.badge-pending{background:rgba(239,68,68,.12);color:var(--error);}
+.badge-user{background:rgba(43,143,212,.12);color:var(--sky);}
+.badge-admin{background:rgba(244,168,32,.15);color:var(--gold-dk);}
+
+/* ── CHARTS placeholder ── */
+.chart-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:24px;}
+.chart-box{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:24px;}
+.chart-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:20px;}
+.mini-chart{display:flex;align-items:flex-end;gap:8px;height:120px;}
+.bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.bar{width:100%;border-radius:6px 6px 0 0;background:linear-gradient(to top,var(--gold),var(--gold-lt));transition:.8s;}
+.bar-label{font-size:.7rem;color:var(--muted);}
+.donut-wrap{display:flex;flex-direction:column;gap:12px;justify-content:center;}
+.donut-item{display:flex;align-items:center;gap:10px;}
+.donut-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+.donut-label{font-size:.83rem;color:var(--muted);}
+.donut-val{margin-left:auto;font-weight:700;font-size:.9rem;color:var(--text);}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(11,23,40,.6);backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--white);border-radius:24px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:36px;box-shadow:0 32px 80px rgba(0,0,0,.25);animation:slideUp .3s ease;}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:24px;}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--muted);padding:4px;}
+.modal-close:hover{color:var(--error);}
+.modal-form .form-group{margin-bottom:18px;}
+.modal-form label{display:block;font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:7px;}
+.modal-form input,.modal-form select,.modal-form textarea{
+  width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-size:.92rem;color:var(--text);background:var(--off);
+  outline:none;transition:border-color .2s;-webkit-appearance:none;
+}
+.modal-form input:focus,.modal-form select:focus,.modal-form textarea:focus{border-color:var(--gold);background:var(--white);}
+.modal-form textarea{min-height:100px;resize:vertical;}
+.modal-footer{display:flex;gap:12px;margin-top:24px;justify-content:flex-end;}
+
+/* empty state */
+.empty-state{text-align:center;padding:64px 24px;color:var(--muted);}
+.empty-state .empty-icon{font-size:3.5rem;margin-bottom:16px;}
+.empty-state h3{color:var(--text);margin-bottom:8px;font-size:1.1rem;}
+
+/* toast */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:999;
+  background:var(--navy);color:var(--white);padding:14px 22px;border-radius:14px;
+  font-size:.9rem;font-weight:500;
+  box-shadow:0 8px 32px rgba(0,0,0,.3);
+  transform:translateY(80px);opacity:0;transition:.3s;
+  display:flex;align-items:center;gap:10px;max-width:320px;
+}
+.toast.show{transform:none;opacity:1;}
+.toast.success{border-left:4px solid var(--success);}
+.toast.error{border-left:4px solid var(--error);}
+
+/* loading overlay */
+.loading-screen{
+  position:fixed;inset:0;background:var(--navy);z-index:999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  transition:opacity .5s;
+}
+.loading-screen.hidden{opacity:0;pointer-events:none;}
+.loading-sun{font-size:3rem;animation:spin 2s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{color:rgba(255,255,255,.6);font-size:.9rem;}
+
+/* MOBILE */
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%);}
+  .sidebar.open{transform:none;}
+  .main{margin-left:0;}
+  .hamburger-admin{display:flex;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .chart-grid{grid-template-columns:1fr;}
+}
+@media(max-width:580px){
+  .stats-row{grid-template-columns:1fr;}
+  .content{padding:16px;}
+  .topbar{padding:12px 16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-sun">☀️</div>
+  <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--white);">Dream Solar Energies</div>
+  <div class="loading-text">Loading admin dashboard…</div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <a href="dream-solar-energies.html">
+      <div class="s-logo-icon">☀️</div>
+      <div>
+        <div class="s-logo-text">Dream Solar</div>
+        <div class="s-logo-sub">Admin Panel</div>
+      </div>
+    </a>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <button class="nav-item active" onclick="showPanel('dashboard',this)"><span class="nav-icon">📊</span> Dashboard</button>
+    <div class="nav-section-label">Management</div>
+    <button class="nav-item" onclick="showPanel('queries',this)"><span class="nav-icon">📋</span> Queries <span class="nav-badge" id="queryBadge">0</span></button>
+    <button class="nav-item" onclick="showPanel('users',this)"><span class="nav-icon">👥</span> Users</button>
+    <button class="nav-item" onclick="showPanel('installations',this)"><span class="nav-icon">🏗️</span> Installations</button>
+    <div class="nav-section-label">Content</div>
+    <button class="nav-item" onclick="showPanel('testimonials',this)"><span class="nav-icon">⭐</span> Testimonials</button>
+    <div class="nav-section-label">Settings</div>
+    <button class="nav-item" onclick="showPanel('settings',this)"><span class="nav-icon">⚙️</span> Settings</button>
+    <a class="nav-item" href="dream-solar-energies.html" target="_blank"><span class="nav-icon">🌐</span> View Website</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="admin-profile">
+      <div class="admin-av" id="adminAv">MH</div>
+      <div>
+        <div class="admin-name" id="adminName">Admin</div>
+        <div class="admin-role">Power System Engineer</div>
+      </div>
+    </div>
+    <button class="btn-logout" onclick="doLogout()">🚪 Sign Out</button>
+  </div>
+</div>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger-admin" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+      <div class="page-title" id="pageTitle">Dashboard</div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-badge">🏆 Authorized Provider</div>
+      <div class="notif-btn" id="notifBtn" title="Notifications">🔔<div class="notif-dot" id="notifDot"></div></div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ═════ DASHBOARD PANEL ═════ -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="stats-row">
+        <div class="stat-card gold">
+          <div class="stat-icon">📋</div>
+          <div class="stat-label">Total Queries</div>
+          <div class="stat-value" id="statQueries">—</div>
+          <div class="stat-change up" id="statQueriesNew"></div>
+        </div>
+        <div class="stat-card sky">
+          <div class="stat-icon">👥</div>
+          <div class="stat-label">Registered Users</div>
+          <div class="stat-value" id="statUsers">—</div>
+          <div class="stat-change up"></div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon">✅</div>
+          <div class="stat-label">Installations Done</div>
+          <div class="stat-value" id="statInstalls">—</div>
+          <div class="stat-change up"></div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-icon">💰</div>
+          <div class="stat-label">Revenue (₹)</div>
+          <div class="stat-value" id="statRevenue">—</div>
+          <div class="stat-change up"></div>
+        </div>
+      </div>
+
+      <!-- Chart row -->
+      <div class="chart-grid">
+        <div class="chart-box">
+          <div class="chart-title">Monthly Queries (Last 6 Months)</div>
+          <div class="mini-chart" id="miniChart">
+            <!-- bars rendered by JS -->
+          </div>
+        </div>
+        <div class="chart-box">
+          <div class="chart-title">Query Types</div>
+          <div class="donut-wrap" id="donutWrap"></div>
+        </div>
+      </div>
+
+      <!-- Recent queries table -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Recent Queries</div>
+          <button class="btn-sm btn-sm-gold" onclick="showPanel('queries', document.querySelector('.nav-item:nth-of-type(2)'))">View All →</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Phone</th><th>kW</th><th>Purpose</th><th>Date</th><th>Status</th></tr></thead>
+            <tbody id="dashQueryTbody"><tr><td colspan="6" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═════ QUERIES PANEL ═════ -->
+    <div class="panel" id="panel-queries">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">All Customer Queries</div>
+          <div class="card-actions">
+            <input class="search-input" id="querySearch" placeholder="🔍 Search name, phone…" oninput="filterQueries()"/>
+            <select class="filter-select" id="queryFilter" onchange="filterQueries()">
+              <option value="">All Status</option>
+              <option value="new">New</option>
+              <option value="in-progress">In Progress</option>
+              <option value="done">Completed</option>
+              <option value="pending">Pending</option>
+            </select>
+            <button class="btn-sm btn-sm-outline" onclick="exportCSV()">⬇ Export CSV</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Name</th><th>Phone</th><th>Address</th><th>kW</th><th>Purpose</th><th>Message</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="queryTbody"><tr><td colspan="10" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═════ USERS PANEL ═════ -->
+    <div class="panel" id="panel-users">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Registered Users</div>
+          <div class="card-actions">
+            <input class="search-input" id="userSearch" placeholder="🔍 Search users…" oninput="filterUsers()"/>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>City</th><th>Role</th><th>Joined</th><th>Actions</th></tr></thead>
+            <tbody id="userTbody"><tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═════ INSTALLATIONS PANEL ═════ -->
+    <div class="panel" id="panel-installations">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Installation Records</div>
+          <div class="card-actions">
+            <button class="btn-sm btn-sm-gold" onclick="openAddInstall()">+ Add Record</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Customer</th><th>Address</th><th>System (kW)</th><th>Amount (₹)</th><th>Engineer</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="installTbody"><tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═════ TESTIMONIALS PANEL ═════ -->
+    <div class="panel" id="panel-testimonials">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Customer Testimonials</div>
+          <div class="card-actions">
+            <button class="btn-sm btn-sm-gold" onclick="openAddTestimonial()">+ Add Testimonial</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Location</th><th>Stars</th><th>Review</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="testimonialTbody"><tr><td colspan="6" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═════ SETTINGS PANEL ═════ -->
+    <div class="panel" id="panel-settings">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Business Settings</div></div>
+        <div style="padding:28px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="modal-form">
+              <div class="form-group"><label>Business Name</label><input type="text" value="Dream Solar Energies"/></div>
+              <div class="form-group"><label>Owner Name</label><input type="text" value="Er. Moin Hamdani – Power System Engineer"/></div>
+              <div class="form-group"><label>Phone</label><input type="tel" value="+91 87961 68099"/></div>
+              <div class="form-group"><label>Email</label><input type="email" value="dreamsolar@gmail.com"/></div>
+              <div class="form-group"><label>Address</label><input type="text" value="New Islampura, Malegaon, Dist. Nashik"/></div>
+              <div class="form-group"><label>Working Hours</label><input type="text" value="9 AM – 8 PM (Mon–Sun)"/></div>
+            </div>
+            <div class="modal-form">
+              <div class="form-group"><label>3 kW Package Price (₹)</label><input type="text" value="1,90,000"/></div>
+              <div class="form-group"><label>Installation Expert</label><input type="text" value="Er. Ibrahim Bafati"/></div>
+              <div class="form-group"><label>System Engineer</label><input type="text" value="Er. Tariq Khanna"/></div>
+              <div class="form-group"><label>Admin Email (for auth)</label><input type="email" id="adminEmail" placeholder="admin@dreamsolar.com"/></div>
+              <div class="form-group"><label>Firebase Project ID</label><input type="text" placeholder="your-project-id"/></div>
+              <div class="form-group"><label>Notes</label><textarea placeholder="Internal notes…"></textarea></div>
+            </div>
+          </div>
+          <div style="margin-top:16px;">
+            <button class="btn-sm btn-sm-gold" style="padding:12px 28px;" onclick="toast('Settings saved successfully!','success')">💾 Save Settings</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<!-- ═══════════════ MODALS ═══════════════ -->
+<!-- Query Detail Modal -->
+<div class="modal-overlay" id="modalQueryDetail">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal('modalQueryDetail')">✕</button>
+    <div class="modal-title">Query Details</div>
+    <div id="queryDetailContent"></div>
+    <div class="modal-footer">
+      <select id="statusSelect" class="filter-select" style="flex:1">
+        <option value="new">New</option>
+        <option value="in-progress">In Progress</option>
+        <option value="done">Completed</option>
+        <option value="pending">Pending</option>
+      </select>
+      <button class="btn-sm btn-sm-gold" onclick="updateQueryStatus()">Update Status</button>
+      <button class="btn-sm btn-sm-outline" onclick="closeModal('modalQueryDetail')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Installation Modal -->
+<div class="modal-overlay" id="modalAddInstall">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal('modalAddInstall')">✕</button>
+    <div class="modal-title">Add Installation Record</div>
+    <div class="modal-form">
+      <div class="form-group"><label>Customer Name *</label><input type="text" id="inst-name" placeholder="Full name"/></div>
+      <div class="form-group"><label>Address *</label><input type="text" id="inst-addr" placeholder="Installation address"/></div>
+      <div class="form-group"><label>System Size (kW) *</label><input type="number" id="inst-kw" placeholder="e.g. 3"/></div>
+      <div class="form-group"><label>Amount (₹)</label><input type="number" id="inst-amt" placeholder="e.g. 190000"/></div>
+      <div class="form-group"><label>Engineer</label>
+        <select id="inst-eng"><option>Er. Ibrahim Bafati</option><option>Er. Tariq Khanna</option><option>Er. Moin Hamdani</option></select>
+      </div>
+      <div class="form-group"><label>Status</label>
+        <select id="inst-status"><option value="planned">Planned</option><option value="in-progress">In Progress</option><option value="completed">Completed</option></select>
+      </div>
+      <div class="form-group"><label>Notes</label><textarea id="inst-notes" placeholder="Any additional notes…"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-sm-outline" onclick="closeModal('modalAddInstall')">Cancel</button>
+      <button class="btn-sm btn-sm-gold" onclick="saveInstallation()">Save Record</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Testimonial Modal -->
+<div class="modal-overlay" id="modalAddTestimonial">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal('modalAddTestimonial')">✕</button>
+    <div class="modal-title">Add Testimonial</div>
+    <div class="modal-form">
+      <div class="form-group"><label>Customer Name *</label><input type="text" id="test-name" placeholder="e.g. Rahul Sharma"/></div>
+      <div class="form-group"><label>Location</label><input type="text" id="test-loc" placeholder="e.g. Malegaon, Nashik"/></div>
+      <div class="form-group"><label>Stars (1-5)</label>
+        <select id="test-stars"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>
+      </div>
+      <div class="form-group"><label>Review *</label><textarea id="test-review" placeholder="Customer's review text…"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-sm-outline" onclick="closeModal('modalAddTestimonial')">Cancel</button>
+      <button class="btn-sm btn-sm-gold" onclick="saveTestimonial()">Save Testimonial</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore, collection, getDocs, doc, getDoc, setDoc, addDoc,
+  updateDoc, deleteDoc, query, orderBy, limit, serverTimestamp, onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// ── FIREBASE CONFIG ── Replace with your project credentials ──
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+// ─────────────────────────────────────────────────────────────
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+// ── ADMIN GUARD ── only allow admin@dreamsolarenergies.com or check Firestore role ──
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { window.location.href = 'login.html'; return; }
+  // Check admin role in Firestore
+  const uDoc = await getDoc(doc(db, 'users', user.uid));
+  const role = uDoc.exists() ? uDoc.data().role : 'user';
+  if (role !== 'admin') {
+    // For demo: allow any logged in user to view dashboard
+    // In production: uncomment below to restrict
+    // window.location.href = 'dream-solar-energies.html'; return;
+  }
+  const name = user.displayName || user.email.split('@')[0];
+  document.getElementById('adminName').textContent = name;
+  document.getElementById('adminAv').textContent = name.substring(0,2).toUpperCase();
+
+  // load all data
+  await Promise.all([loadQueries(), loadUsers(), loadInstallations(), loadTestimonials()]);
+  buildChart();
+  document.getElementById('loadingScreen').classList.add('hidden');
+  setTimeout(() => document.getElementById('loadingScreen').remove(), 600);
+});
+
+// ── QUERIES ──
+window._queries = [];
+window._currentQueryId = null;
+
+async function loadQueries() {
+  const snap = await getDocs(query(collection(db,'queries'), orderBy('createdAt','desc')));
+  window._queries = snap.docs.map(d => ({id:d.id,...d.data()}));
+  renderQueries(window._queries);
+  renderDashQueries(window._queries.slice(0,5));
+  document.getElementById('statQueries').textContent = window._queries.length;
+  const newCount = window._queries.filter(q=>q.status==='new'||!q.status).length;
+  document.getElementById('queryBadge').textContent = newCount;
+  document.getElementById('statQueriesNew').textContent = `↑ ${newCount} new`;
+  if (newCount > 0) document.getElementById('notifDot').style.display = 'block';
+}
+
+function renderDashQueries(queries) {
+  const tb = document.getElementById('dashQueryTbody');
+  if (!queries.length) { tb.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:32px;">No queries yet.</td></tr>'; return; }
+  tb.innerHTML = queries.map((q,i) => `
+    <tr>
+      <td><strong>${escHtml(q.name||'—')}</strong></td>
+      <td>${escHtml(q.phone||'—')}</td>
+      <td><strong>${escHtml(q.kw||'—')} kW</strong></td>
+      <td>${escHtml(q.purpose||'—')}</td>
+      <td>${fmtDate(q.createdAt)}</td>
+      <td>${statusBadge(q.status||'new')}</td>
+    </tr>`).join('');
+}
+
+function renderQueries(queries) {
+  const tb = document.getElementById('queryTbody');
+  if (!queries.length) { tb.innerHTML = '<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:40px;">No queries found.</td></tr>'; return; }
+  tb.innerHTML = queries.map((q,i) => `
+    <tr>
+      <td style="color:var(--muted);font-size:.8rem">#${i+1}</td>
+      <td><strong>${escHtml(q.name||'—')}</strong></td>
+      <td><a href="tel:${escHtml(q.phone||'')}" style="color:var(--sky);text-decoration:none;">${escHtml(q.phone||'—')}</a></td>
+      <td style="max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(q.address||'—')}</td>
+      <td><strong>${escHtml(q.kw||'—')} kW</strong></td>
+      <td>${escHtml(q.purpose||'—')}</td>
+      <td style="max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(q.message||'—')}</td>
+      <td style="white-space:nowrap;">${fmtDate(q.createdAt)}</td>
+      <td>${statusBadge(q.status||'new')}</td>
+      <td>
+        <div style="display:flex;gap:6px;">
+          <button class="btn-sm btn-sm-outline" onclick="viewQuery('${q.id}')">👁 View</button>
+          <button class="btn-sm btn-sm-danger" onclick="deleteQuery('${q.id}')">🗑</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+window.filterQueries = () => {
+  const s = document.getElementById('querySearch').value.toLowerCase();
+  const f = document.getElementById('queryFilter').value;
+  let filtered = window._queries;
+  if (s) filtered = filtered.filter(q => (q.name||'').toLowerCase().includes(s)||(q.phone||'').includes(s)||(q.address||'').toLowerCase().includes(s));
+  if (f) filtered = filtered.filter(q => (q.status||'new') === f);
+  renderQueries(filtered);
+};
+
+window.viewQuery = (id) => {
+  const q = window._queries.find(x=>x.id===id);
+  if (!q) return;
+  window._currentQueryId = id;
+  document.getElementById('queryDetailContent').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+      ${detail('👤 Name', q.name)} ${detail('📞 Phone', q.phone)}
+      ${detail('📍 Address', q.address)} ${detail('⚡ kW Required', q.kw + ' kW')}
+      ${detail('🎯 Purpose', q.purpose)} ${detail('📅 Date', fmtDate(q.createdAt))}
+    </div>
+    ${q.message ? `<div style="background:var(--off);border-radius:10px;padding:14px;"><strong style="font-size:.82rem;color:var(--muted);">MESSAGE</strong><p style="margin-top:6px;font-size:.92rem;">${escHtml(q.message)}</p></div>` : ''}`;
+  document.getElementById('statusSelect').value = q.status || 'new';
+  document.getElementById('modalQueryDetail').classList.add('open');
+};
+
+window.updateQueryStatus = async () => {
+  if (!window._currentQueryId) return;
+  const status = document.getElementById('statusSelect').value;
+  await updateDoc(doc(db,'queries',window._currentQueryId), { status });
+  closeModal('modalQueryDetail');
+  toast('Status updated!','success');
+  await loadQueries();
+};
+
+window.deleteQuery = async (id) => {
+  if (!confirm('Delete this query?')) return;
+  await deleteDoc(doc(db,'queries',id));
+  toast('Query deleted','success');
+  await loadQueries();
+};
+
+window.exportCSV = () => {
+  const headers = ['Name','Phone','Address','kW','Purpose','Message','Date','Status'];
+  const rows = window._queries.map(q => [q.name,q.phone,q.address,q.kw,q.purpose,q.message,fmtDate(q.createdAt),q.status||'new'].map(v=>`"${(v||'').replace(/"/g,'""')}"`));
+  const csv = [headers,...rows].map(r=>r.join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'dream-solar-queries.csv';
+  a.click();
+  toast('CSV exported!','success');
+};
+
+// ── USERS ──
+window._users = [];
+async function loadUsers() {
+  const snap = await getDocs(query(collection(db,'users'), orderBy('createdAt','desc')));
+  window._users = snap.docs.map(d=>({id:d.id,...d.data()}));
+  renderUsers(window._users);
+  document.getElementById('statUsers').textContent = window._users.length;
+}
+function renderUsers(users) {
+  const tb = document.getElementById('userTbody');
+  if (!users.length) { tb.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:40px;">No registered users yet.</td></tr>'; return; }
+  tb.innerHTML = users.map(u=>`
+    <tr>
+      <td><strong>${escHtml(u.name||'—')}</strong></td>
+      <td>${escHtml(u.email||'—')}</td>
+      <td>${escHtml(u.phone||'—')}</td>
+      <td>${escHtml(u.city||'—')}</td>
+      <td>${u.role==='admin'?'<span class="badge badge-admin">Admin</span>':'<span class="badge badge-user">User</span>'}</td>
+      <td>${fmtDate(u.createdAt)}</td>
+      <td><button class="btn-sm btn-sm-outline" onclick="toggleAdmin('${u.id}','${u.role||'user'}')">
+        ${u.role==='admin'?'Remove Admin':'Make Admin'}
+      </button></td>
+    </tr>`).join('');
+}
+window.filterUsers = () => {
+  const s = document.getElementById('userSearch').value.toLowerCase();
+  renderUsers(window._users.filter(u => (u.name||'').toLowerCase().includes(s)||(u.email||'').toLowerCase().includes(s)));
+};
+window.toggleAdmin = async (uid, role) => {
+  const newRole = role==='admin' ? 'user' : 'admin';
+  await updateDoc(doc(db,'users',uid), {role: newRole});
+  toast(`Role updated to ${newRole}`,'success');
+  await loadUsers();
+};
+
+// ── INSTALLATIONS ──
+window._installations = [];
+async function loadInstallations() {
+  try {
+    const snap = await getDocs(query(collection(db,'installations'), orderBy('createdAt','desc')));
+    window._installations = snap.docs.map(d=>({id:d.id,...d.data()}));
+  } catch(e) { window._installations = []; }
+  renderInstallations(window._installations);
+  const done = window._installations.filter(i=>i.status==='completed').length;
+  document.getElementById('statInstalls').textContent = done;
+  const rev = window._installations.filter(i=>i.status==='completed').reduce((s,i)=>s+(parseFloat(i.amount)||190000),0);
+  document.getElementById('statRevenue').textContent = '₹'+formatNum(rev);
+}
+function renderInstallations(list) {
+  const tb = document.getElementById('installTbody');
+  if (!list.length) { tb.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:40px;">No installations recorded yet. Add your first one!</td></tr>'; return; }
+  tb.innerHTML = list.map(i=>`
+    <tr>
+      <td><strong>${escHtml(i.customerName||'—')}</strong></td>
+      <td>${escHtml(i.address||'—')}</td>
+      <td><strong>${escHtml(i.kw||'—')} kW</strong></td>
+      <td>₹${formatNum(i.amount||0)}</td>
+      <td>${escHtml(i.engineer||'—')}</td>
+      <td>${fmtDate(i.createdAt)}</td>
+      <td>${instStatusBadge(i.status)}</td>
+      <td><button class="btn-sm btn-sm-danger" onclick="deleteInstall('${i.id}')">🗑</button></td>
+    </tr>`).join('');
+}
+window.openAddInstall = () => document.getElementById('modalAddInstall').classList.add('open');
+window.saveInstallation = async () => {
+  const name = document.getElementById('inst-name').value.trim();
+  const addr = document.getElementById('inst-addr').value.trim();
+  const kw   = document.getElementById('inst-kw').value;
+  if (!name||!addr||!kw) { toast('Please fill required fields','error'); return; }
+  await addDoc(collection(db,'installations'),{
+    customerName:name, address:addr, kw:kw,
+    amount: document.getElementById('inst-amt').value||190000,
+    engineer: document.getElementById('inst-eng').value,
+    status: document.getElementById('inst-status').value,
+    notes: document.getElementById('inst-notes').value,
+    createdAt: serverTimestamp()
+  });
+  closeModal('modalAddInstall');
+  toast('Installation record saved!','success');
+  await loadInstallations();
+};
+window.deleteInstall = async (id) => {
+  if (!confirm('Delete this record?')) return;
+  await deleteDoc(doc(db,'installations',id));
+  toast('Record deleted','success');
+  await loadInstallations();
+};
+
+// ── TESTIMONIALS ──
+window._testimonials = [];
+async function loadTestimonials() {
+  try {
+    const snap = await getDocs(query(collection(db,'testimonials'), orderBy('createdAt','desc')));
+    window._testimonials = snap.docs.map(d=>({id:d.id,...d.data()}));
+  } catch(e) { window._testimonials = []; }
+  renderTestimonials(window._testimonials);
+}
+function renderTestimonials(list) {
+  const tb = document.getElementById('testimonialTbody');
+  if (!list.length) { tb.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:40px;">No testimonials yet.</td></tr>'; return; }
+  tb.innerHTML = list.map(t=>`
+    <tr>
+      <td><strong>${escHtml(t.name||'—')}</strong></td>
+      <td>${escHtml(t.location||'—')}</td>
+      <td>${'★'.repeat(parseInt(t.stars)||5)}</td>
+      <td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escHtml(t.review||'—')}</td>
+      <td>${fmtDate(t.createdAt)}</td>
+      <td><button class="btn-sm btn-sm-danger" onclick="deleteTestimonial('${t.id}')">🗑</button></td>
+    </tr>`).join('');
+}
+window.openAddTestimonial = () => document.getElementById('modalAddTestimonial').classList.add('open');
+window.saveTestimonial = async () => {
+  const name = document.getElementById('test-name').value.trim();
+  const rev  = document.getElementById('test-review').value.trim();
+  if (!name||!rev) { toast('Please fill required fields','error'); return; }
+  await addDoc(collection(db,'testimonials'),{
+    name, location: document.getElementById('test-loc').value,
+    stars: document.getElementById('test-stars').value,
+    review: rev, createdAt: serverTimestamp()
+  });
+  closeModal('modalAddTestimonial');
+  toast('Testimonial saved!','success');
+  await loadTestimonials();
+};
+window.deleteTestimonial = async (id) => {
+  if (!confirm('Delete this testimonial?')) return;
+  await deleteDoc(doc(db,'testimonials',id));
+  toast('Deleted','success');
+  await loadTestimonials();
+};
+
+// ── CHART ──
+function buildChart() {
+  const months = ['Jan','Feb','Mar','Apr','May','Jun'];
+  const vals   = [3,7,5,12,9,window._queries.length||6];
+  const max    = Math.max(...vals)||1;
+  document.getElementById('miniChart').innerHTML = months.map((m,i)=>`
+    <div class="bar-wrap">
+      <div style="flex:1;display:flex;align-items:flex-end;width:100%;">
+        <div class="bar" style="height:${Math.round((vals[i]/max)*100)}%;"></div>
+      </div>
+      <div class="bar-label">${m}</div>
+    </div>`).join('');
+
+  const types = {};
+  window._queries.forEach(q => { types[q.purpose||'Other'] = (types[q.purpose||'Other']||0)+1; });
+  const colors = ['#F4A820','#2B8FD4','#10b981','#6366f1','#f97316'];
+  document.getElementById('donutWrap').innerHTML = Object.entries(types).slice(0,5).map(([k,v],i)=>`
+    <div class="donut-item">
+      <div class="donut-dot" style="background:${colors[i%colors.length]}"></div>
+      <div class="donut-label">${k}</div>
+      <div class="donut-val">${v}</div>
+    </div>`).join('') || '<div style="color:var(--muted);font-size:.9rem;padding:16px 0;">No data yet</div>';
+}
+
+// logout
+window.doLogout = async () => {
+  await signOut(auth);
+  window.location.href = 'login.html';
+};
+
+// ── HELPERS ──
+function fmtDate(ts) {
+  if (!ts) return '—';
+  try {
+    const d = ts.toDate ? ts.toDate() : new Date(ts);
+    return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+  } catch(e) { return '—'; }
+}
+function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function formatNum(n) { return Number(n||0).toLocaleString('en-IN'); }
+function statusBadge(s) {
+  const m = {new:'badge-new',done:'badge-done','in-progress':'badge-progress',pending:'badge-pending'};
+  const l = {new:'New',done:'Completed','in-progress':'In Progress',pending:'Pending'};
+  return `<span class="badge ${m[s]||'badge-new'}">${l[s]||s}</span>`;
+}
+function instStatusBadge(s) {
+  const m = {planned:'badge-pending',completed:'badge-done','in-progress':'badge-progress'};
+  return `<span class="badge ${m[s]||'badge-pending'}">${s||'planned'}</span>`;
+}
+function detail(label, val) {
+  return `<div style="background:var(--off);border-radius:10px;padding:12px 14px;">
+    <div style="font-size:.75rem;font-weight:700;color:var(--muted);margin-bottom:4px;">${label}</div>
+    <div style="font-size:.95rem;font-weight:600;color:var(--text);">${escHtml(val||'—')}</div>
+  </div>`;
+}
+</script>
+
+<script>
+// panel switching
+window.showPanel = (id, btn) => {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const titles = {dashboard:'Dashboard',queries:'Customer Queries',users:'Registered Users',installations:'Installations',testimonials:'Testimonials',settings:'Settings'};
+  document.getElementById('pageTitle').textContent = titles[id]||id;
+  if (window.innerWidth < 900) document.getElementById('sidebar').classList.remove('open');
+};
+window.toggleSidebar = () => document.getElementById('sidebar').classList.toggle('open');
+window.closeModal = (id) => document.getElementById(id).classList.remove('open');
+window.toast = (msg, type='success') => {
+  const t = document.getElementById('toast');
+  t.textContent = (type==='success'?'✅ ':'❌ ') + msg;
+  t.className = 'toast show ' + type;
+  setTimeout(() => t.classList.remove('show'), 3000);
+};
+// close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(o => o.addEventListener('click', e => { if(e.target===o) o.classList.remove('open'); }));
+</script>
+</body>
+</html>

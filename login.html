@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Login – Dream Solar Energies</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#F4A820;--gold-lt:#FBCF6A;--gold-dk:#C07D0A;
+  --navy:#0B1728;--navy-mid:#122240;--navy-lt:#1A3058;
+  --sky:#2B8FD4;--white:#FAFCFF;--off:#F0F4FA;
+  --text:#1A2540;--muted:#5A6A88;
+  --success:#10b981;--error:#ef4444;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:linear-gradient(160deg,var(--navy) 0%,#0D2040 60%,#0A1520 100%);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px;position:relative;overflow-x:hidden;
+}
+/* animated background */
+.bg-orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;}
+.bg-orb-1{width:600px;height:600px;top:-200px;right:-200px;
+  background:radial-gradient(circle,rgba(244,168,32,.12),transparent 70%);
+  animation:float 8s ease-in-out infinite;}
+.bg-orb-2{width:400px;height:400px;bottom:-100px;left:-100px;
+  background:radial-gradient(circle,rgba(43,143,212,.10),transparent 70%);
+  animation:float 10s ease-in-out 2s infinite reverse;}
+.grid-bg{position:fixed;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:50px 50px;pointer-events:none;z-index:0;}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(20px,-20px) scale(1.05);}}
+
+.auth-wrapper{
+  position:relative;z-index:1;width:100%;max-width:480px;
+}
+/* logo */
+.auth-logo{text-align:center;margin-bottom:36px;}
+.auth-logo a{text-decoration:none;display:inline-flex;flex-direction:column;align-items:center;gap:12px;}
+.logo-sun{
+  width:72px;height:72px;border-radius:20px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-lt));
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.2rem;
+  box-shadow:0 8px 32px rgba(244,168,32,.4);
+  animation:pulse-glow 3s ease-in-out infinite;
+}
+@keyframes pulse-glow{0%,100%{box-shadow:0 8px 32px rgba(244,168,32,.4);}50%{box-shadow:0 12px 48px rgba(244,168,32,.7);}}
+.logo-name-text{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--white);letter-spacing:-.01em;}
+.logo-sub-text{font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:.12em;text-transform:uppercase;}
+
+/* card */
+.auth-card{
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:28px;padding:44px 40px;
+  box-shadow:0 32px 80px rgba(0,0,0,.4);
+}
+/* tabs */
+.auth-tabs{display:flex;background:rgba(255,255,255,.06);border-radius:14px;padding:4px;margin-bottom:36px;gap:4px;}
+.auth-tab{
+  flex:1;padding:11px;border:none;background:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;
+  color:rgba(255,255,255,.5);border-radius:11px;transition:.25s;
+}
+.auth-tab.active{background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:var(--navy);}
+/* form */
+.auth-form{display:none;}
+.auth-form.active{display:block;}
+.form-group{margin-bottom:20px;}
+.form-group label{display:block;color:rgba(255,255,255,.7);font-size:.85rem;font-weight:600;margin-bottom:8px;letter-spacing:.02em;}
+.input-wrap{position:relative;}
+.input-wrap .icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:1rem;opacity:.6;}
+.input-wrap input,.input-wrap select{
+  width:100%;padding:14px 16px 14px 44px;
+  background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);
+  border-radius:12px;color:var(--white);
+  font-family:'DM Sans',sans-serif;font-size:.97rem;outline:none;
+  transition:border-color .2s,background .2s;-webkit-appearance:none;
+}
+.input-wrap input::placeholder{color:rgba(255,255,255,.3);}
+.input-wrap input:focus,.input-wrap select:focus{border-color:var(--gold);background:rgba(255,255,255,.10);}
+.input-wrap select option{background:var(--navy-mid);color:var(--white);}
+.pw-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:1rem;padding:4px;}
+.pw-toggle:hover{color:var(--gold);}
+/* submit */
+.btn-auth{
+  width:100%;padding:15px;border:none;border-radius:14px;cursor:pointer;
+  background:linear-gradient(135deg,var(--gold),var(--gold-lt));
+  color:var(--navy);font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;
+  margin-top:8px;transition:.3s;
+  box-shadow:0 6px 24px rgba(244,168,32,.35);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-auth:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 32px rgba(244,168,32,.5);}
+.btn-auth:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+/* divider */
+.divider{display:flex;align-items:center;gap:12px;margin:24px 0;}
+.divider hr{flex:1;border:none;border-top:1px solid rgba(255,255,255,.1);}
+.divider span{color:rgba(255,255,255,.3);font-size:.82rem;white-space:nowrap;}
+/* google btn */
+.btn-google{
+  width:100%;padding:13px;border:1.5px solid rgba(255,255,255,.15);border-radius:14px;
+  background:rgba(255,255,255,.05);color:var(--white);
+  font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:10px;transition:.25s;
+}
+.btn-google:hover{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.3);}
+.btn-google img{width:20px;height:20px;}
+/* alert */
+.alert{
+  padding:12px 16px;border-radius:10px;font-size:.88rem;font-weight:500;
+  margin-bottom:20px;display:none;align-items:center;gap:10px;
+}
+.alert.show{display:flex;}
+.alert-error{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5;}
+.alert-success{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#6ee7b7;}
+/* forgot */
+.forgot-link{float:right;color:var(--gold);font-size:.83rem;text-decoration:none;font-weight:600;}
+.forgot-link:hover{text-decoration:underline;}
+/* back */
+.back-link{text-align:center;margin-top:28px;}
+.back-link a{color:rgba(255,255,255,.4);text-decoration:none;font-size:.88rem;transition:color .2s;}
+.back-link a:hover{color:var(--gold);}
+/* spinner */
+.spinner{width:18px;height:18px;border:2px solid rgba(11,23,40,.3);border-top-color:var(--navy);border-radius:50%;animation:spin .6s linear infinite;display:none;}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* admin link */
+.admin-notice{
+  margin-top:20px;padding:14px 18px;
+  background:rgba(244,168,32,.08);border:1px solid rgba(244,168,32,.2);
+  border-radius:12px;text-align:center;
+}
+.admin-notice span{color:rgba(255,255,255,.5);font-size:.84rem;}
+.admin-notice a{color:var(--gold);font-weight:700;text-decoration:none;font-size:.84rem;}
+.admin-notice a:hover{text-decoration:underline;}
+/* strength */
+.pw-strength{margin-top:6px;height:4px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden;}
+.pw-strength-bar{height:100%;border-radius:4px;transition:.3s;width:0;}
+.pw-strength-label{font-size:.75rem;margin-top:4px;height:14px;}
+@media(max-width:520px){.auth-card{padding:32px 20px;border-radius:20px;}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<div class="auth-wrapper">
+  <div class="auth-logo">
+    <a href="dream-solar-energies.html">
+      <div class="logo-sun">☀️</div>
+      <span class="logo-name-text">Dream Solar Energies</span>
+      <span class="logo-sub-text">Power Your Future</span>
+    </a>
+  </div>
+
+  <div class="auth-card">
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login')">Sign In</button>
+      <button class="auth-tab" onclick="switchTab('register')">Create Account</button>
+    </div>
+
+    <!-- ALERT -->
+    <div class="alert alert-error" id="alertBox"><span id="alertIcon">⚠️</span><span id="alertMsg"></span></div>
+
+    <!-- LOGIN FORM -->
+    <div class="auth-form active" id="loginForm">
+      <div class="form-group">
+        <label>Email Address</label>
+        <div class="input-wrap">
+          <span class="icon">✉️</span>
+          <input type="email" id="loginEmail" placeholder="your@email.com" autocomplete="email"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Password <a href="#" class="forgot-link" onclick="forgotPassword(event)">Forgot?</a></label>
+        <div class="input-wrap">
+          <span class="icon">🔒</span>
+          <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password"/>
+          <button class="pw-toggle" onclick="togglePw('loginPassword',this)" type="button">👁️</button>
+        </div>
+      </div>
+      <button class="btn-auth" onclick="doLogin()" id="loginBtn">
+        <div class="spinner" id="loginSpinner"></div>
+        <span id="loginBtnText">Sign In →</span>
+      </button>
+      <div class="divider"><hr/><span>or continue with</span><hr/></div>
+      <button class="btn-google" onclick="doGoogleLogin()">
+        <img src="https://www.google.com/favicon.ico" alt="Google"/>
+        Continue with Google
+      </button>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div class="auth-form" id="registerForm">
+      <div class="form-group">
+        <label>Full Name</label>
+        <div class="input-wrap">
+          <span class="icon">👤</span>
+          <input type="text" id="regName" placeholder="e.g. Rahul Sharma" autocomplete="name"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <div class="input-wrap">
+          <span class="icon">📞</span>
+          <input type="tel" id="regPhone" placeholder="+91 98765 43210"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <div class="input-wrap">
+          <span class="icon">✉️</span>
+          <input type="email" id="regEmail" placeholder="your@email.com" autocomplete="email"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>City / Area</label>
+        <div class="input-wrap">
+          <span class="icon">📍</span>
+          <input type="text" id="regCity" placeholder="e.g. Malegaon, Nashik"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <div class="input-wrap">
+          <span class="icon">🔒</span>
+          <input type="password" id="regPassword" placeholder="Create a strong password" oninput="checkStrength(this.value)" autocomplete="new-password"/>
+          <button class="pw-toggle" onclick="togglePw('regPassword',this)" type="button">👁️</button>
+        </div>
+        <div class="pw-strength"><div class="pw-strength-bar" id="strengthBar"></div></div>
+        <div class="pw-strength-label" id="strengthLabel" style="color:rgba(255,255,255,.4);"></div>
+      </div>
+      <button class="btn-auth" onclick="doRegister()" id="regBtn">
+        <div class="spinner" id="regSpinner"></div>
+        <span id="regBtnText">Create Account →</span>
+      </button>
+      <div class="divider"><hr/><span>or continue with</span><hr/></div>
+      <button class="btn-google" onclick="doGoogleLogin()">
+        <img src="https://www.google.com/favicon.ico" alt="Google"/>
+        Continue with Google
+      </button>
+    </div>
+
+    <div class="admin-notice">
+      <span>Admin? </span><a href="admin.html">Go to Admin Dashboard →</a>
+    </div>
+  </div>
+
+  <div class="back-link">
+    <a href="dream-solar-energies.html">← Back to Dream Solar Energies</a>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+         GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail,
+         onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// ── FIREBASE CONFIG ── Replace with your project credentials ──
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+// ─────────────────────────────────────────────────────────────
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+const gProvider = new GoogleAuthProvider();
+
+// redirect if already logged in
+onAuthStateChanged(auth, user => {
+  if (user) {
+    const ret = new URLSearchParams(window.location.search).get('redirect');
+    window.location.href = ret || 'dream-solar-energies.html';
+  }
+});
+
+// save user profile to Firestore
+async function saveUserProfile(user, extra = {}) {
+  const ref = doc(db, 'users', user.uid);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) {
+    await setDoc(ref, {
+      uid: user.uid,
+      name: extra.name || user.displayName || '',
+      email: user.email,
+      phone: extra.phone || '',
+      city: extra.city || '',
+      role: 'user',
+      createdAt: serverTimestamp(),
+      lastLogin: serverTimestamp(),
+    });
+  } else {
+    await setDoc(ref, { lastLogin: serverTimestamp() }, { merge: true });
+  }
+}
+
+// show alert
+window.showAlert = (msg, type='error') => {
+  const box = document.getElementById('alertBox');
+  const msgEl = document.getElementById('alertMsg');
+  const icon = document.getElementById('alertIcon');
+  box.className = 'alert show alert-' + type;
+  icon.textContent = type === 'error' ? '⚠️' : '✅';
+  msgEl.textContent = msg;
+  if (type === 'success') setTimeout(() => box.classList.remove('show'), 3500);
+};
+
+// loading state
+window.setLoading = (btnId, spinnerId, textId, loading) => {
+  document.getElementById(btnId).disabled = loading;
+  document.getElementById(spinnerId).style.display = loading ? 'block' : 'none';
+  document.getElementById(textId).style.opacity = loading ? '0' : '1';
+};
+
+// login
+window.doLogin = async () => {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pw    = document.getElementById('loginPassword').value;
+  if (!email || !pw) { showAlert('Please enter email and password.'); return; }
+  setLoading('loginBtn','loginSpinner','loginBtnText', true);
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email, pw);
+    await saveUserProfile(cred.user);
+    showAlert('Welcome back! Redirecting…','success');
+    setTimeout(() => window.location.href = 'dream-solar-energies.html', 1200);
+  } catch(e) {
+    showAlert(friendlyError(e.code));
+    setLoading('loginBtn','loginSpinner','loginBtnText', false);
+  }
+};
+
+// register
+window.doRegister = async () => {
+  const name  = document.getElementById('regName').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const city  = document.getElementById('regCity').value.trim();
+  const pw    = document.getElementById('regPassword').value;
+  if (!name||!email||!pw) { showAlert('Please fill all required fields.'); return; }
+  if (pw.length < 6) { showAlert('Password must be at least 6 characters.'); return; }
+  setLoading('regBtn','regSpinner','regBtnText', true);
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pw);
+    await updateProfile(cred.user, { displayName: name });
+    await saveUserProfile(cred.user, { name, phone, city });
+    showAlert('Account created! Welcome 🎉','success');
+    setTimeout(() => window.location.href = 'dream-solar-energies.html', 1400);
+  } catch(e) {
+    showAlert(friendlyError(e.code));
+    setLoading('regBtn','regSpinner','regBtnText', false);
+  }
+};
+
+// google
+window.doGoogleLogin = async () => {
+  try {
+    const cred = await signInWithPopup(auth, gProvider);
+    await saveUserProfile(cred.user);
+    showAlert('Signed in with Google! Redirecting…','success');
+    setTimeout(() => window.location.href = 'dream-solar-energies.html', 1200);
+  } catch(e) {
+    if(e.code !== 'auth/popup-closed-by-user') showAlert(friendlyError(e.code));
+  }
+};
+
+// forgot password
+window.forgotPassword = async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  if (!email) { showAlert('Enter your email first, then click Forgot.'); return; }
+  try {
+    await sendPasswordResetEmail(auth, email);
+    showAlert('Password reset email sent! Check your inbox.','success');
+  } catch(e) { showAlert(friendlyError(e.code)); }
+};
+
+function friendlyError(code) {
+  const map = {
+    'auth/email-already-in-use': 'This email is already registered. Try signing in.',
+    'auth/invalid-email': 'Please enter a valid email address.',
+    'auth/weak-password': 'Password too weak — use at least 6 characters.',
+    'auth/user-not-found': 'No account found with this email.',
+    'auth/wrong-password': 'Incorrect password. Please try again.',
+    'auth/invalid-credential': 'Invalid email or password.',
+    'auth/too-many-requests': 'Too many attempts. Please wait a moment.',
+    'auth/network-request-failed': 'Network error. Check your connection.',
+  };
+  return map[code] || 'Something went wrong. Please try again.';
+}
+</script>
+<script>
+window.switchTab = (tab) => {
+  document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='register')));
+  document.getElementById('loginForm').classList.toggle('active', tab==='login');
+  document.getElementById('registerForm').classList.toggle('active', tab==='register');
+  document.getElementById('alertBox').classList.remove('show');
+};
+window.togglePw = (id, btn) => {
+  const inp = document.getElementById(id);
+  const show = inp.type === 'password';
+  inp.type = show ? 'text' : 'password';
+  btn.textContent = show ? '🙈' : '👁️';
+};
+window.checkStrength = (pw) => {
+  const bar = document.getElementById('strengthBar');
+  const lbl = document.getElementById('strengthLabel');
+  let score = 0;
+  if (pw.length >= 8) score++;
+  if (/[A-Z]/.test(pw)) score++;
+  if (/[0-9]/.test(pw)) score++;
+  if (/[^A-Za-z0-9]/.test(pw)) score++;
+  const configs = [
+    {w:'0%',c:'transparent',t:''},
+    {w:'25%',c:'#ef4444',t:'Weak'},
+    {w:'50%',c:'#f97316',t:'Fair'},
+    {w:'75%',c:'#eab308',t:'Good'},
+    {w:'100%',c:'#10b981',t:'Strong'},
+  ];
+  const cfg = configs[Math.min(score, 4)];
+  bar.style.width = cfg.w; bar.style.background = cfg.c;
+  lbl.textContent = cfg.t; lbl.style.color = cfg.c;
+};
+// enter key
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const lf = document.getElementById('loginForm');
+  if (lf.classList.contains('active')) window.doLogin();
+  else window.doRegister();
+});
+</script>
+</body>
+</html>

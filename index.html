@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dream Solar Energies – Power Your Future</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* ── RESET & VARIABLES ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:      #F4A820;
+    --gold-lt:   #FBCF6A;
+    --gold-dk:   #C07D0A;
+    --navy:      #0B1728;
+    --navy-mid:  #122240;
+    --navy-lt:   #1A3058;
+    --sky:       #2B8FD4;
+    --sky-lt:    #60B8F0;
+    --white:     #FAFCFF;
+    --off:       #F0F4FA;
+    --text:      #1A2540;
+    --muted:     #5A6A88;
+    --radius:    14px;
+    --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.15; }
+  h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 900; }
+  h2 { font-size: clamp(1.8rem, 4vw, 2.9rem); font-weight: 700; }
+  h3 { font-size: clamp(1.2rem, 2.5vw, 1.55rem); font-weight: 600; }
+  p  { font-size: 1.05rem; line-height: 1.75; color: var(--muted); }
+
+  /* ── UTILITY ── */
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .section    { padding: 96px 0; }
+  .section-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    color: var(--navy);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .section-title { color: var(--text); margin-bottom: 16px; }
+  .section-sub   { max-width: 560px; margin: 0 auto 52px; text-align: center; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 600;
+    cursor: pointer; border: none;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    color: var(--navy);
+    box-shadow: 0 6px 24px rgba(244,168,32,.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(244,168,32,.5); }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.5);
+    color: var(--white);
+  }
+  .btn-outline:hover { background: rgba(255,255,255,.1); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    padding: 18px 0;
+    transition: var(--transition);
+  }
+  nav.scrolled {
+    background: rgba(11,23,40,.92);
+    backdrop-filter: blur(18px);
+    padding: 12px 0;
+    box-shadow: 0 4px 32px rgba(0,0,0,.25);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 14px rgba(244,168,32,.4);
+    flex-shrink: 0;
+  }
+  .logo-text { display: flex; flex-direction: column; }
+  .logo-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 1.12rem;
+    color: var(--white); line-height: 1.1;
+  }
+  .logo-tagline { font-size: .68rem; font-weight: 500; color: var(--gold-lt); letter-spacing: .08em; text-transform: uppercase; }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,.8); text-decoration: none;
+    font-size: .95rem; font-weight: 500;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { margin-left: 8px; }
+
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 4px;
+    background: none; border: none;
+  }
+  .hamburger span {
+    display: block; width: 26px; height: 2px;
+    background: var(--white); border-radius: 2px;
+    transition: var(--transition);
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none; flex-direction: column;
+    background: var(--navy); padding: 24px;
+    gap: 20px; position: fixed; top: 72px; left: 0; right: 0;
+    z-index: 998; box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--white); text-decoration: none;
+    font-size: 1.05rem; font-weight: 500; padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 50%, #0D2040 100%);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 120px 0 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(244,168,32,.10) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(43,143,212,.10) 0%, transparent 60%);
+  }
+  .sun-circle {
+    position: absolute; right: -180px; top: 50%;
+    transform: translateY(-50%);
+    width: 680px; height: 680px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,168,32,.18) 0%, rgba(244,168,32,.04) 50%, transparent 70%);
+    border: 1px solid rgba(244,168,32,.12);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  .sun-ring {
+    position: absolute; right: -230px; top: 50%;
+    transform: translateY(-50%);
+    width: 780px; height: 780px;
+    border-radius: 50%;
+    border: 1px solid rgba(244,168,32,.06);
+    animation: pulse 6s ease-in-out 1s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: translateY(-50%) scale(1); opacity: 1; }
+    50%      { transform: translateY(-50%) scale(1.04); opacity: .7; }
+  }
+  .grid-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 640px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(244,168,32,.12);
+    border: 1px solid rgba(244,168,32,.3);
+    color: var(--gold-lt);
+    padding: 8px 18px; border-radius: 100px;
+    font-size: .85rem; font-weight: 600; letter-spacing: .04em;
+    margin-bottom: 28px;
+    animation: fadeUp .8s ease both;
+  }
+  .hero-badge span { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); animation: blink 1.5s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+  .hero-title { color: var(--white); margin-bottom: 24px; animation: fadeUp .8s .15s ease both; }
+  .hero-title em { color: var(--gold); font-style: normal; }
+  .hero-desc { color: rgba(255,255,255,.68); font-size: 1.1rem; margin-bottom: 40px; animation: fadeUp .8s .3s ease both; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp .8s .45s ease both; }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 64px;
+    animation: fadeUp .8s .6s ease both;
+    flex-wrap: wrap;
+  }
+  .stat-item { }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--white); line-height: 1; }
+  .stat-num span { color: var(--gold); }
+  .stat-label { font-size: .82rem; color: rgba(255,255,255,.5); margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+
+  /* ── WHY SOLAR ── */
+  #why {
+    background: var(--off);
+  }
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  .why-image {
+    position: relative;
+    border-radius: 24px; overflow: hidden;
+    box-shadow: 0 24px 80px rgba(11,23,40,.15);
+  }
+  .why-image-placeholder {
+    width: 100%; aspect-ratio: 4/3;
+    background: linear-gradient(160deg, var(--navy-lt) 0%, var(--navy-mid) 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 16px; color: rgba(255,255,255,.5);
+    font-size: 5rem;
+  }
+  .why-image-placeholder p { font-size: .9rem; }
+  .why-badge-float {
+    position: absolute; bottom: 24px; left: 24px;
+    background: var(--white);
+    border-radius: 16px; padding: 16px 20px;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12);
+  }
+  .why-badge-float .icon { font-size: 2rem; }
+  .why-badge-float strong { font-size: 1.1rem; font-family: 'Playfair Display', serif; color: var(--text); }
+  .why-badge-float span  { font-size: .8rem; color: var(--muted); }
+  .why-points { display: flex; flex-direction: column; gap: 24px; margin-top: 36px; }
+  .why-point { display: flex; gap: 16px; }
+  .why-point-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .why-point-text h4 { color: var(--text); margin-bottom: 4px; font-size: 1rem; }
+  .why-point-text p  { font-size: .9rem; margin: 0; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--white); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  }
+  .service-card {
+    background: var(--white);
+    border: 1px solid rgba(11,23,40,.08);
+    border-radius: 20px; padding: 36px 28px;
+    transition: var(--transition);
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--sky));
+    transform: scaleX(0); transform-origin: left;
+    transition: var(--transition);
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(11,23,40,.10); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon { font-size: 2.4rem; margin-bottom: 20px; }
+  .service-card h3 { color: var(--text); margin-bottom: 12px; font-size: 1.2rem; }
+  .service-card p  { font-size: .92rem; }
+  .service-learn {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--gold-dk); font-weight: 600; font-size: .9rem;
+    margin-top: 20px; text-decoration: none;
+    transition: gap .2s;
+  }
+  .service-learn:hover { gap: 10px; }
+
+  /* ── HOW IT WORKS ── */
+  #process { background: var(--navy); }
+  #process .section-tag { background: rgba(244,168,32,.15); color: var(--gold); }
+  #process h2 { color: var(--white); }
+  #process .section-sub p { color: rgba(255,255,255,.55); }
+  .steps {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 32px;
+    position: relative; margin-top: 64px;
+  }
+  .steps::before {
+    content: '';
+    position: absolute; top: 36px; left: calc(12.5% + 20px); right: calc(12.5% + 20px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--sky));
+    z-index: 0;
+  }
+  .step { text-align: center; position: relative; z-index: 1; }
+  .step-num {
+    width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 24px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700;
+    color: var(--navy);
+    box-shadow: 0 6px 24px rgba(244,168,32,.35);
+  }
+  .step h3 { color: var(--white); font-size: 1.05rem; margin-bottom: 10px; }
+  .step p   { color: rgba(255,255,255,.5); font-size: .88rem; }
+
+  /* ── PRODUCTS ── */
+  #products { background: var(--off); }
+  .products-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+  .product-card {
+    background: var(--white); border-radius: 20px; overflow: hidden;
+    border: 1px solid rgba(11,23,40,.07);
+    transition: var(--transition);
+  }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(11,23,40,.09); }
+  .product-img {
+    background: linear-gradient(160deg, var(--navy-lt), var(--navy-mid));
+    aspect-ratio: 16/9;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    position: relative; overflow: hidden;
+  }
+  .product-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(11,23,40,.4) 100%);
+  }
+  .product-badge {
+    position: absolute; top: 14px; right: 14px; z-index: 1;
+    background: var(--gold);
+    color: var(--navy); font-size: .72rem; font-weight: 700;
+    padding: 4px 12px; border-radius: 100px;
+  }
+  .product-body { padding: 24px; }
+  .product-body h3 { color: var(--text); margin-bottom: 8px; font-size: 1.1rem; }
+  .product-body p  { font-size: .88rem; margin-bottom: 16px; }
+  .product-specs { display: flex; gap: 12px; flex-wrap: wrap; }
+  .spec-pill {
+    background: var(--off); border-radius: 100px;
+    padding: 4px 12px; font-size: .78rem; font-weight: 500; color: var(--muted);
+  }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--white); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+  .testimonial-card {
+    background: var(--off); border-radius: 20px; padding: 32px 28px;
+    border: 1px solid rgba(11,23,40,.06);
+    transition: var(--transition);
+  }
+  .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(11,23,40,.08); }
+  .stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 16px; }
+  .testimonial-card blockquote { font-size: .94rem; color: var(--text); font-style: italic; line-height: 1.7; margin-bottom: 24px; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .reviewer-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--sky));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-weight: 700; color: var(--white);
+    font-size: 1rem;
+  }
+  .reviewer-name { font-weight: 600; color: var(--text); font-size: .92rem; }
+  .reviewer-loc  { font-size: .78rem; color: var(--muted); }
+
+  /* ── SAVINGS CALCULATOR ── */
+  #calculator { background: var(--navy); }
+  #calculator .section-tag { background: rgba(244,168,32,.15); color: var(--gold); }
+  #calculator h2, #calculator .section-title { color: var(--white); }
+  .calc-wrap {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 28px; padding: 52px; max-width: 780px; margin: 0 auto;
+    backdrop-filter: blur(12px);
+  }
+  .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .form-group { margin-bottom: 24px; }
+  .form-group label { display: block; color: rgba(255,255,255,.7); font-size: .88rem; font-weight: 600; margin-bottom: 8px; }
+  .form-group input, .form-group select {
+    width: 100%; padding: 14px 18px;
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+    border-radius: 12px; color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: .98rem;
+    outline: none; transition: border-color .2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+  .form-group select option { background: var(--navy-mid); }
+  .calc-result {
+    background: linear-gradient(135deg, rgba(244,168,32,.15), rgba(43,143,212,.1));
+    border: 1px solid rgba(244,168,32,.25);
+    border-radius: 16px; padding: 28px; text-align: center; margin-top: 12px;
+  }
+  .result-label { color: rgba(255,255,255,.6); font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; }
+  .result-num { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold); font-weight: 900; margin: 8px 0; }
+  .result-sub { color: rgba(255,255,255,.5); font-size: .85rem; }
+  #calculator .btn-primary { width: 100%; justify-content: center; margin-top: 8px; font-size: 1.05rem; padding: 16px; }
+
+  /* ── FAQ ── */
+  #faq { background: var(--off); }
+  .faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+  .faq-item {
+    background: var(--white); border-radius: 16px;
+    border: 1px solid rgba(11,23,40,.07); overflow: hidden;
+  }
+  .faq-q {
+    padding: 22px 28px; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    font-weight: 600; font-size: 1rem; color: var(--text);
+    transition: color .2s;
+    user-select: none;
+  }
+  .faq-q:hover { color: var(--gold-dk); }
+  .faq-q .arrow { font-size: .9rem; transition: transform .3s; flex-shrink: 0; }
+  .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s; }
+  .faq-item.open .faq-a { max-height: 300px; }
+  .faq-a-inner { padding: 0 28px 24px; font-size: .94rem; color: var(--muted); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start; }
+  .contact-info h2 { color: var(--text); margin-bottom: 16px; }
+  .contact-info p  { margin-bottom: 36px; }
+  .contact-details { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item { display: flex; gap: 14px; align-items: flex-start; }
+  .contact-item-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .contact-item-text strong { color: var(--text); font-size: .9rem; display: block; }
+  .contact-item-text span  { font-size: .9rem; color: var(--muted); }
+  .contact-form {
+    background: var(--off); border-radius: 28px; padding: 44px;
+    border: 1px solid rgba(11,23,40,.07);
+  }
+  .contact-form .form-group label { color: var(--text); }
+  .contact-form input, .contact-form select, .contact-form textarea {
+    width: 100%; padding: 14px 18px;
+    background: var(--white); border: 1.5px solid rgba(11,23,40,.1);
+    border-radius: 12px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: .98rem;
+    outline: none; transition: border-color .2s;
+    -webkit-appearance: none;
+  }
+  .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
+    border-color: var(--gold);
+  }
+  .contact-form textarea { resize: vertical; min-height: 120px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .contact-form .btn-primary { width: 100%; justify-content: center; margin-top: 8px; font-size: 1.05rem; padding: 16px; }
+
+  /* ── CTA BANNER ── */
+  #cta-banner {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    padding: 80px 0; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  #cta-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(244,168,32,.12), transparent 60%);
+  }
+  #cta-banner h2 { color: var(--white); position: relative; z-index: 1; margin-bottom: 16px; }
+  #cta-banner p  { color: rgba(255,255,255,.6); max-width: 500px; margin: 0 auto 36px; position: relative; z-index: 1; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,.05);
+    padding: 64px 0 32px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 52px; }
+  .footer-brand p { color: rgba(255,255,255,.45); font-size: .9rem; margin-top: 16px; max-width: 280px; }
+  .footer-socials { display: flex; gap: 12px; margin-top: 24px; }
+  .social-btn {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: rgba(255,255,255,.07);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.6); text-decoration: none; font-size: .95rem;
+    transition: var(--transition);
+  }
+  .social-btn:hover { background: var(--gold); color: var(--navy); }
+  .footer-col h4 { color: var(--white); font-size: .9rem; font-weight: 700; margin-bottom: 20px; letter-spacing: .06em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul li a { color: rgba(255,255,255,.45); text-decoration: none; font-size: .9rem; transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.06);
+    padding-top: 28px; display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: gap;
+  }
+  .footer-bottom p { color: rgba(255,255,255,.3); font-size: .83rem; }
+  .cert-badges { display: flex; gap: 10px; }
+  .cert-badge {
+    background: rgba(255,255,255,.06); border-radius: 8px;
+    padding: 6px 12px; font-size: .72rem; color: rgba(255,255,255,.4);
+    font-weight: 600; letter-spacing: .04em;
+  }
+
+  /* ── BACK TO TOP ── */
+  #back-top {
+    position: fixed; bottom: 28px; right: 28px; z-index: 990;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    border: none; cursor: pointer; font-size: 1.2rem;
+    box-shadow: 0 6px 20px rgba(244,168,32,.4);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: var(--transition);
+  }
+  #back-top.visible { opacity: 1; pointer-events: all; }
+  #back-top:hover { transform: translateY(-3px); }
+
+  /* ── TEAM ── */
+  #team { background: var(--white); }
+  .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+  .team-card {
+    background: var(--off); border-radius: 24px; overflow: hidden;
+    border: 1px solid rgba(11,23,40,.07); transition: var(--transition);
+  }
+  .team-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(11,23,40,.10); }
+  .team-avatar {
+    background: linear-gradient(160deg, var(--navy-lt), var(--navy-mid));
+    padding: 40px 28px 32px; text-align: center; position: relative;
+  }
+  .avatar-circle {
+    width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 16px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-weight: 900; color: var(--navy);
+    font-size: 1.7rem; box-shadow: 0 8px 24px rgba(244,168,32,.4);
+  }
+  .team-role-badge {
+    display: inline-block;
+    background: rgba(244,168,32,.18); border: 1px solid rgba(244,168,32,.3);
+    color: var(--gold-lt); padding: 5px 14px; border-radius: 100px;
+    font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .team-body { padding: 28px; }
+  .team-body h3 { color: var(--text); font-size: 1.2rem; margin-bottom: 4px; }
+  .team-body .team-role { color: var(--gold-dk); font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px; }
+  .team-body p { font-size: .88rem; margin-bottom: 18px; }
+  .team-contact { display: flex; flex-direction: column; gap: 8px; }
+  .team-contact-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--white); border: 1px solid rgba(11,23,40,.1);
+    color: var(--text); text-decoration: none; font-size: .82rem; font-weight: 600;
+    padding: 7px 14px; border-radius: 100px; transition: var(--transition);
+  }
+  .team-contact-pill:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+  .team-skills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .skill-tag {
+    background: var(--white); border: 1px solid rgba(11,23,40,.1);
+    color: var(--muted); font-size: .75rem; font-weight: 600;
+    padding: 5px 12px; border-radius: 100px;
+  }
+
+  /* ── DOCUMENTS ── */
+  .docs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+  .doc-card {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px; padding: 36px 28px; text-align: center;
+    transition: var(--transition);
+  }
+  .doc-card:hover { background: rgba(255,255,255,.08); transform: translateY(-4px); }
+  .doc-icon { font-size: 3rem; margin-bottom: 20px; }
+  .doc-card h3 { color: var(--white); font-size: 1.15rem; margin-bottom: 12px; }
+  .doc-card p  { color: rgba(255,255,255,.55); font-size: .88rem; margin-bottom: 16px; }
+  .doc-note {
+    background: rgba(244,168,32,.15); border: 1px solid rgba(244,168,32,.25);
+    color: var(--gold-lt); font-size: .78rem; font-weight: 600;
+    padding: 6px 14px; border-radius: 100px; display: inline-block;
+  }
+  .docs-note-box {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px; padding: 22px 28px; margin-top: 36px;
+    display: flex; gap: 16px; align-items: flex-start;
+    font-size: 1.3rem;
+  }
+  .docs-note-box p { color: rgba(255,255,255,.55); font-size: .9rem; margin: 0; }
+
+  /* ── QUERY FORM ── */
+  .query-wrap {
+    max-width: 820px; margin: 0 auto;
+    background: var(--white); border-radius: 28px; padding: 48px;
+    border: 1px solid rgba(11,23,40,.08);
+    box-shadow: 0 16px 64px rgba(11,23,40,.08);
+  }
+  .query-wrap .form-group label { color: var(--text); font-weight: 600; font-size: .88rem; margin-bottom: 8px; display: block; }
+  .query-wrap input, .query-wrap select, .query-wrap textarea {
+    width: 100%; padding: 14px 18px;
+    background: var(--off); border: 1.5px solid rgba(11,23,40,.1);
+    border-radius: 12px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: .98rem;
+    outline: none; transition: border-color .2s;
+    -webkit-appearance: none;
+  }
+  .query-wrap input:focus, .query-wrap select:focus, .query-wrap textarea:focus { border-color: var(--gold); background: var(--white); }
+  .query-wrap textarea { resize: vertical; min-height: 120px; }
+
+  /* ── RESPONSIVE additions ── */
+  @media (max-width: 1024px) {
+    .team-grid, .docs-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 768px) {
+    .team-grid, .docs-grid { grid-template-columns: 1fr; }
+    .query-wrap { padding: 28px 18px; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .services-grid, .products-grid, .testimonials-grid { grid-template-columns: repeat(2,1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .why-grid { grid-template-columns: 1fr; gap: 40px; }
+    .steps { grid-template-columns: repeat(2,1fr); }
+    .steps::before { display: none; }
+  }
+  @media (max-width: 768px) {
+    .section { padding: 64px 0; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .services-grid, .products-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    .calc-row { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .hero-stats { gap: 24px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .calc-wrap { padding: 32px 20px; }
+    .contact-form { padding: 28px 20px; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+  @media (max-width: 480px) {
+    .steps { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-actions { flex-direction: column; }
+    .btn { width: 100%; justify-content: center; }
+    .cta-actions { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#hero" class="logo">
+      <div class="logo-icon">☀️</div>
+      <div class="logo-text">
+        <span class="logo-name">Dream Solar Energies</span>
+        <span class="logo-tagline">Power Your Future</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#why">Why Solar</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#team">Our Team</a></li>
+      <li><a href="#query">Query</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary nav-cta" style="padding:11px 24px;font-size:.9rem;">Get Free Quote</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#why" onclick="closeMobile()">Why Solar</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#process" onclick="closeMobile()">How It Works</a>
+  <a href="#products" onclick="closeMobile()">Products</a>
+  <a href="#team" onclick="closeMobile()">Our Team</a>
+  <a href="#query" onclick="closeMobile()">Submit Query</a>
+  <a href="#faq" onclick="closeMobile()">FAQ</a>
+  <a href="#contact" onclick="closeMobile()">Contact Us</a>
+  <a href="#contact" class="btn btn-primary" onclick="closeMobile()">Get Free Quote ➔</a>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-lines"></div>
+  <div class="sun-circle"></div>
+  <div class="sun-ring"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span></span> Trusted Solar Partner Since 2015
+      </div>
+      <h1 class="hero-title">
+        Harness the Sun,<br><em>Transform Your Life</em>
+      </h1>
+      <p class="hero-desc">
+        Dream Solar Energies delivers premium solar solutions for homes and businesses — reducing energy bills, protecting the environment, and building a brighter tomorrow.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Get a Free Quote ➔</a>
+        <a href="#process" class="btn btn-outline">See How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">5,200<span>+</span></div>
+          <div class="stat-label">Installations</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">$48<span>M</span></div>
+          <div class="stat-label">Customer Savings</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">98<span>%</span></div>
+          <div class="stat-label">Satisfaction Rate</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">10<span>yr</span></div>
+          <div class="stat-label">Workmanship Warranty</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ WHY SOLAR ═══════════════ -->
+<section id="why" class="section">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-image">
+        <div class="why-image-placeholder">
+          ☀️
+          <p>Solar — Clean & Sustainable Energy</p>
+        </div>
+        <div class="why-badge-float">
+          <div class="icon">🌱</div>
+          <div>
+            <strong>Eco-Certified</strong>
+            <span>Carbon Neutral Installations</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-tag">Why Go Solar</div>
+        <h2 class="section-title">The Smart Investment for Your Home & Planet</h2>
+        <p>Solar energy is no longer the future — it's the smartest financial and environmental decision you can make today. With rising electricity costs and generous government incentives, there has never been a better time to make the switch.</p>
+        <div class="why-points">
+          <div class="why-point">
+            <div class="why-point-icon">💰</div>
+            <div class="why-point-text">
+              <h4>Slash Your Energy Bills</h4>
+              <p>Our customers save an average of $1,800 per year on electricity — that's real money back in your pocket every month.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon">📈</div>
+            <div class="why-point-text">
+              <h4>Increase Property Value</h4>
+              <p>Homes with solar sell up to 4.1% more than comparable non-solar homes, adding significant equity to your property.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon">🏛️</div>
+            <div class="why-point-text">
+              <h4>Government Incentives & Tax Credits</h4>
+              <p>Take advantage of the federal Investment Tax Credit (ITC) and local rebates that can reduce your system cost by up to 30%.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon">🌍</div>
+            <div class="why-point-text">
+              <h4>Protect the Environment</h4>
+              <p>A typical solar installation offsets over 100 tons of CO₂ over its lifetime — the equivalent of planting 2,500 trees.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SERVICES ═══════════════ -->
+<section id="services" class="section">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">Our Services</div>
+      <h2 class="section-title">Complete Solar Solutions</h2>
+    </div>
+    <p class="section-sub">From consultation to commissioning — and beyond — we handle every aspect of your solar journey with precision and care.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <h3>Residential Solar</h3>
+        <p>Custom-designed rooftop systems for homes of all sizes. Our most popular package — the <strong style="color:var(--gold-dk)">3 kW Residential Solar Plant</strong> — is available at just <strong style="color:var(--gold-dk)">₹1,90,000/-</strong>, fully installed with all hardware and commissioning included.</p>
+        <a href="#query" class="service-learn">Get a Quote →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Commercial Solar</h3>
+        <p>Large-scale solar installations for businesses, warehouses, and commercial facilities. Reduce operating costs and demonstrate your sustainability commitment.</p>
+        <a href="#contact" class="service-learn">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔋</div>
+        <h3>Battery Storage</h3>
+        <p>Store excess solar power for use at night or during outages. Our advanced battery systems give you true energy independence and round-the-clock power security.</p>
+        <a href="#contact" class="service-learn">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌾</div>
+        <h3>Agricultural Solar</h3>
+        <p>Powering farms, irrigation systems, and rural properties with reliable off-grid and on-grid solar solutions designed for high-demand agricultural applications.</p>
+        <a href="#contact" class="service-learn">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>EV Charging Stations</h3>
+        <p>Solar-powered EV chargers for homes and businesses. Charge your electric vehicle with 100% clean energy and never pay for gas or grid electricity again.</p>
+        <a href="#contact" class="service-learn">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>Maintenance & Monitoring</h3>
+        <p>24/7 system monitoring, annual inspections, and rapid repair services to ensure your solar investment keeps performing at peak efficiency for decades.</p>
+        <a href="#contact" class="service-learn">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PROCESS ═══════════════ -->
+<section id="process" class="section">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">How It Works</div>
+      <h2 class="section-title" style="color:var(--white)">Your Solar Journey in 4 Simple Steps</h2>
+    </div>
+    <p class="section-sub"><span style="color:rgba(255,255,255,.55)">We make going solar effortless. From your first call to the day you flip the switch, our team manages everything.</span></p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Free Consultation</h3>
+        <p>Our energy expert visits your property, assesses your energy needs, and designs a customised solar solution — completely free and with no obligation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Custom Design</h3>
+        <p>We create a detailed system design and energy forecast using satellite data and advanced software, showing you exactly what to expect before any work begins.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Professional Install</h3>
+        <p>Our certified installers complete the job in just 1–3 days with minimal disruption. We handle all permits, approvals, and grid connection paperwork on your behalf.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Start Saving</h3>
+        <p>Monitor your system's real-time performance via our app and watch your electricity bills drop from day one. Your 10-year warranty and 24/7 support starts immediately.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PRODUCTS ═══════════════ -->
+<section id="products" class="section">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">Our Products</div>
+      <h2 class="section-title">Premium Solar Technology</h2>
+    </div>
+    <p class="section-sub">We partner with the world's leading solar manufacturers to bring you panels and systems with the highest efficiency, durability, and warranty coverage.</p>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-img">
+          ☀️
+          <div class="product-badge">Best Seller</div>
+        </div>
+        <div class="product-body">
+          <h3>MonoPerc Elite 400W</h3>
+          <p>High-efficiency monocrystalline panels ideal for residential rooftops with limited space. Delivers maximum power output in any weather condition.</p>
+          <div class="product-specs">
+            <span class="spec-pill">400W Output</span>
+            <span class="spec-pill">21.4% Efficiency</span>
+            <span class="spec-pill">25yr Warranty</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          🔋
+          <div class="product-badge">Popular</div>
+        </div>
+        <div class="product-body">
+          <h3>PowerWall Pro Battery</h3>
+          <p>13.5 kWh home battery system that stores solar energy for night-time use and seamlessly takes over during grid outages for uninterrupted power.</p>
+          <div class="product-specs">
+            <span class="spec-pill">13.5 kWh</span>
+            <span class="spec-pill">Whole-Home Backup</span>
+            <span class="spec-pill">10yr Warranty</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          ⚡
+        </div>
+        <div class="product-body">
+          <h3>SmartInverter X Series</h3>
+          <p>Next-generation hybrid inverters with built-in monitoring, rapid shutdown compliance, and compatibility with all major battery storage systems.</p>
+          <div class="product-specs">
+            <span class="spec-pill">5–15 kW Range</span>
+            <span class="spec-pill">97.5% Efficiency</span>
+            <span class="spec-pill">Real-Time Monitoring</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TEAM ═══════════════ -->
+<section id="team" class="section">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">Our Expert Team</div>
+      <h2 class="section-title">The People Behind Your Solar</h2>
+    </div>
+    <p class="section-sub">Meet the dedicated professionals who design, install, and support every Dream Solar Energies project with passion and expertise.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">
+          <div class="avatar-circle">MH</div>
+          <div class="team-role-badge">Owner & Founder</div>
+        </div>
+        <div class="team-body">
+          <h3>Er. Moin Hamdani</h3>
+          <p class="team-role">Owner & Founder</p>
+          <p>A visionary solar entrepreneur with deep expertise in renewable energy systems, project management, and customer success. Er. Moin leads Dream Solar Energies with a mission to make solar accessible and affordable for every household in the region.</p>
+          <div class="team-contact">
+            <a href="tel:+918796168099" class="team-contact-pill">📞 +91 87961 68099</a>
+            <a href="mailto:dreamsolar@gmail.com" class="team-contact-pill">✉️ dreamsolar@gmail.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <div class="avatar-circle" style="background:linear-gradient(135deg,var(--sky),var(--sky-lt))">IB</div>
+          <div class="team-role-badge">Installation Expert</div>
+        </div>
+        <div class="team-body">
+          <h3>Er. Ibrahim Bafati</h3>
+          <p class="team-role">Installation Expert</p>
+          <p>Er. Ibrahim is our lead installation specialist with hands-on experience in rooftop and ground-mount solar deployments across residential, commercial, and agricultural sites. He ensures every installation is precise, safe, and code-compliant.</p>
+          <div class="team-skills">
+            <span class="skill-tag">Rooftop Systems</span>
+            <span class="skill-tag">Grid Connection</span>
+            <span class="skill-tag">Safety Compliance</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <div class="avatar-circle" style="background:linear-gradient(135deg,#2ecc71,#27ae60)">TK</div>
+          <div class="team-role-badge">System Engineer</div>
+        </div>
+        <div class="team-body">
+          <h3>Er. Tariq Khanna</h3>
+          <p class="team-role">System Engineer</p>
+          <p>Er. Tariq specialises in solar system design, load analysis, and performance optimisation. He uses advanced simulation tools to engineer the perfect system for each client's energy needs, ensuring maximum efficiency and long-term reliability.</p>
+          <div class="team-skills">
+            <span class="skill-tag">System Design</span>
+            <span class="skill-tag">Load Analysis</span>
+            <span class="skill-tag">Performance Tuning</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ DOCUMENTS REQUIRED ═══════════════ -->
+<section id="documents" class="section" style="background:var(--navy);padding:80px 0;">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag" style="background:rgba(244,168,32,.15);color:var(--gold)">Documentation</div>
+      <h2 style="color:var(--white);margin-bottom:16px;">Documents Required for Installation</h2>
+      <p style="color:rgba(255,255,255,.55);max-width:520px;margin:0 auto 52px;">To process your solar installation smoothly, please keep the following documents ready. Our team will guide you through the submission process.</p>
+    </div>
+    <div class="docs-grid">
+      <div class="doc-card">
+        <div class="doc-icon">🪪</div>
+        <h3>Aadhaar Card</h3>
+        <p>Valid Aadhaar card of the property owner or authorised applicant is required for identity verification and subsidy processing.</p>
+        <div class="doc-note">Self-attested photocopy accepted</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📋</div>
+        <h3>PAN Card</h3>
+        <p>PAN card is required for tax documentation, government subsidy registration, and financial processing of the solar installation.</p>
+        <div class="doc-note">Self-attested photocopy accepted</div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📜</div>
+        <h3>Plot / Property Papers</h3>
+        <p>Original or certified copy of plot ownership papers, 7/12 extract, or registered sale deed to confirm property ownership for installation approval.</p>
+        <div class="doc-note">Original + 1 photocopy required</div>
+      </div>
+    </div>
+    <div class="docs-note-box">
+      <span>📌</span>
+      <p><strong style="color:var(--white)">Note:</strong> All documents should be in the name of the property owner. Our team will assist you if documents are in a family member's name. Additional documents may be required for commercial or agricultural installations. Contact us for a complete checklist.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+<section id="testimonials" class="section">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">Customer Reviews</div>
+      <h2 class="section-title">Thousands of Happy Customers</h2>
+    </div>
+    <p class="section-sub">Don't just take our word for it. Here's what homeowners and businesses across the country are saying about Dream Solar Energies.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Dream Solar Energies transformed our home. Our electricity bill went from $340 a month to virtually zero. The team was professional, clean, and finished on time. Best investment we've ever made."</blockquote>
+        <div class="reviewer">
+          <div class="reviewer-avatar">MR</div>
+          <div>
+            <div class="reviewer-name">Michael Rodriguez</div>
+            <div class="reviewer-loc">Homeowner · Austin, TX</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"As a business owner, I was skeptical about the ROI. Dream Solar showed me a detailed financial breakdown and delivered exactly what they promised. We break even in 4 years and have already saved $22,000."</blockquote>
+        <div class="reviewer">
+          <div class="reviewer-avatar">SL</div>
+          <div>
+            <div class="reviewer-name">Sarah Liu</div>
+            <div class="reviewer-loc">Business Owner · Phoenix, AZ</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"The battery storage system is a game changer. We had two grid outages last year and never even noticed — the lights stayed on and our fridge kept running. Peace of mind is priceless."</blockquote>
+        <div class="reviewer">
+          <div class="reviewer-avatar">JP</div>
+          <div>
+            <div class="reviewer-name">James & Priya Nair</div>
+            <div class="reviewer-loc">Homeowners · San Diego, CA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CALCULATOR ═══════════════ -->
+<section id="calculator" class="section">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">Savings Estimator</div>
+      <h2 class="section-title" style="color:var(--white)">How Much Could You Save?</h2>
+      <p style="color:rgba(255,255,255,.55);max-width:500px;margin:0 auto 48px;">Enter your details below for an instant estimate of your annual solar savings. No personal info required.</p>
+    </div>
+    <div class="calc-wrap">
+      <div class="calc-row">
+        <div class="form-group">
+          <label>Monthly Electricity Bill ($)</label>
+          <input type="number" id="bill" placeholder="e.g. 200" min="0" />
+        </div>
+        <div class="form-group">
+          <label>Property Type</label>
+          <select id="propType">
+            <option value="home">Residential Home</option>
+            <option value="biz">Commercial Business</option>
+            <option value="farm">Agricultural / Farm</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Roof Size (approx. sq ft)</label>
+          <input type="number" id="roofSize" placeholder="e.g. 1500" min="0" />
+        </div>
+        <div class="form-group">
+          <label>State / Sun Hours</label>
+          <select id="sunHours">
+            <option value="6">High Sun (AZ, NV, CA — 6h+)</option>
+            <option value="5" selected>Average Sun (TX, FL — 5h)</option>
+            <option value="4">Lower Sun (NY, WA — 4h)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="calcSavings()">Calculate My Savings ➔</button>
+      <div class="calc-result" id="calcResult" style="display:none;margin-top:28px;">
+        <div class="result-label">Estimated Annual Savings</div>
+        <div class="result-num" id="resultNum">$0</div>
+        <div class="result-sub" id="resultSub">Over 25 years: — | Est. System Size: —</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FAQ ═══════════════ -->
+<section id="faq" class="section">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">FAQ</div>
+      <h2 class="section-title">Common Questions</h2>
+    </div>
+    <p class="section-sub">Everything you need to know before making the switch to solar.</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How long does a solar installation take? <span class="arrow">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Most residential installations are completed in 1 to 3 days. Commercial and agricultural systems may take 1–2 weeks depending on the scale. We handle all permits and grid connection paperwork, which can add 2–6 weeks before your system is officially commissioned and generating power.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Will solar panels work on cloudy or rainy days? <span class="arrow">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Yes! Modern solar panels can generate electricity even in overcast or cloudy conditions, though output will be reduced compared to full sun. On average, panels produce 10–25% of their rated capacity on cloudy days. Pairing with a battery storage system ensures you always have power available regardless of weather.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What warranties come with my solar system? <span class="arrow">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">We provide a 10-year workmanship warranty on all installations. Solar panels come with a 25-year performance guarantee from the manufacturer. Inverters are covered for 10–12 years, and battery storage systems carry a 10-year warranty. We also offer an optional extended service plan for comprehensive ongoing maintenance coverage.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What financing options are available? <span class="arrow">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">We offer several flexible financing options: cash purchase (lowest total cost), solar loans with $0 down starting from 2.99% APR, solar leases with no upfront cost, and Power Purchase Agreements (PPAs) where you pay only for the energy generated. Our financial advisors will help you find the best option for your situation.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How do I claim the federal solar tax credit? <span class="arrow">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">The federal Investment Tax Credit (ITC) allows you to deduct 30% of your solar system cost from your federal taxes. You claim it when filing your annual tax return using IRS Form 5695. Our team will provide all the documentation you need, and we recommend consulting a tax professional to maximise all available credits and incentives.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Will solar damage my roof? <span class="arrow">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">When installed correctly by certified professionals, solar panels actually protect your roof from UV degradation, rain, and debris. Our team conducts a roof integrity assessment before installation. If your roof needs repairs or reinforcement, we'll advise you before proceeding to ensure a safe, watertight installation that preserves your roof's lifespan.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA BANNER ═══════════════ -->
+<section id="cta-banner">
+  <div class="container">
+    <h2>Ready to Start Saving?</h2>
+    <p>Get your free, no-obligation solar quote today and see exactly how much you could save. Takes less than 2 minutes.</p>
+    <div class="cta-actions">
+      <a href="#contact" class="btn btn-primary">Get Free Quote ➔</a>
+      <a href="tel:+918796168099" class="btn btn-outline">📞 Call +91 87961 68099</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ QUERY FORM ═══════════════ -->
+<section id="query" class="section" style="background:var(--off);">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">Submit a Query</div>
+      <h2 class="section-title">Tell Us About Your Solar Requirement</h2>
+      <p class="section-sub">Fill in your details below and our expert team will get back to you with a customised solar solution within 24 hours.</p>
+    </div>
+    <div class="query-wrap">
+      <div class="form-row">
+        <div class="form-group"><label>Full Name *</label><input type="text" id="q-name" placeholder="e.g. Rahul Sharma" /></div>
+        <div class="form-group"><label>Contact Number *</label><input type="tel" id="q-phone" placeholder="e.g. +91 9876543210" /></div>
+      </div>
+      <div class="form-group"><label>Full Address *</label><input type="text" id="q-address" placeholder="House No., Street, Area, City, District" /></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Required System Capacity (kW) *</label>
+          <select id="q-kw">
+            <option value="">— Select kW Rating —</option>
+            <option value="1">1 kW – Small Home / Basic Needs</option>
+            <option value="2">2 kW – Medium Home</option>
+            <option value="3">3 kW – Standard Residential (₹1,90,000/-)</option>
+            <option value="5">5 kW – Large Home / Small Office</option>
+            <option value="7">7 kW – Commercial / Industrial</option>
+            <option value="10">10 kW – Large Commercial</option>
+            <option value="other">Other / Not Sure (We'll advise)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Purpose / Installation Type *</label>
+          <select id="q-purpose">
+            <option value="">— Select Purpose —</option>
+            <option>Residential – Home Use</option>
+            <option>Commercial – Shop / Office</option>
+            <option>Agricultural – Farm / Irrigation</option>
+            <option>Industrial – Factory / Warehouse</option>
+            <option>Educational – School / College</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Additional Message / Requirements</label>
+        <textarea id="q-message" placeholder="Describe your current electricity bill, roof type, any special requirements or questions you may have..."></textarea>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:16px;font-size:1.05rem;" onclick="submitQuery(event)">Submit My Query ➔</button>
+      <p style="font-size:.8rem;margin-top:14px;text-align:center;color:var(--muted);">🔒 Your details are confidential and only shared with our solar experts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-tag">Contact Us</div>
+        <h2>Let's Talk About Your Solar Future</h2>
+        <p>Ready to make the switch? Have questions? Our solar experts are standing by and will respond within 24 hours. No pressure — just honest advice.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div class="contact-item-text">
+              <strong>Phone / WhatsApp</strong>
+              <span>+91 87961 68099 (Daily, 9am–8pm)</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <span>dreamsolar@gmail.com</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div class="contact-item-text">
+              <strong>Office Address</strong>
+              <span>New Islampura, Malegaon, Dist. Nashik, Maharashtra</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🕐</div>
+            <div class="contact-item-text">
+              <strong>Working Hours</strong>
+              <span>Monday to Sunday: 9:00 AM – 8:00 PM</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">👤</div>
+            <div class="contact-item-text">
+              <strong>Owner & Contact Person</strong>
+              <span>Er. Moin Hamdani</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3 style="color:var(--text);margin-bottom:28px;font-size:1.3rem;">Get Your Free Quote</h3>
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="Rahul" /></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Sharma" /></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="rahul@email.com" /></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 98765 43210" /></div>
+        <div class="form-group">
+          <label>Service Interested In</label>
+          <select>
+            <option>Residential Solar – 3 kW (₹1,90,000/-)</option>
+            <option>Residential Solar – Custom kW</option>
+            <option>Commercial Solar Installation</option>
+            <option>Agricultural Solar</option>
+            <option>Battery Storage System</option>
+            <option>EV Charging Station</option>
+            <option>Maintenance & Monitoring</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message (Optional)</label>
+          <textarea placeholder="Tell us about your property, current electricity bill, or any questions..."></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="submitForm(event)">Send My Request ➔</button>
+        <p style="font-size:.8rem;margin-top:16px;text-align:center;">🔒 Your information is 100% secure and never shared.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" class="logo">
+          <div class="logo-icon">☀️</div>
+          <div class="logo-text">
+            <span class="logo-name">Dream Solar Energies</span>
+            <span class="logo-tagline">Power Your Future</span>
+          </div>
+        </a>
+        <p>Providing premium solar solutions to homes and businesses in Malegaon, Nashik, and across Maharashtra. Certified, trusted, and committed to a cleaner planet.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">𝕏</a>
+          <a href="#" class="social-btn">▶</a>
+          <a href="#" class="social-btn">📷</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Residential Solar</a></li>
+          <li><a href="#services">Commercial Solar</a></li>
+          <li><a href="#services">Battery Storage</a></li>
+          <li><a href="#services">Agricultural Solar</a></li>
+          <li><a href="#services">EV Charging</a></li>
+          <li><a href="#services">Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Team</h4>
+        <ul>
+          <li><a href="#team">Er. Moin Hamdani</a></li>
+          <li><a href="#team">Er. Ibrahim Bafati</a></li>
+          <li><a href="#team">Er. Tariq Khanna</a></li>
+          <li><a href="#documents">Documents Required</a></li>
+          <li><a href="#query">Submit a Query</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+918796168099">📞 +91 87961 68099</a></li>
+          <li><a href="mailto:dreamsolar@gmail.com">✉️ dreamsolar@gmail.com</a></li>
+          <li><a href="#contact">📍 New Islampura, Malegaon</a></li>
+          <li><a href="#contact">Dist. Nashik, Maharashtra</a></li>
+          <li><a href="#contact">🕐 9 AM – 8 PM Daily</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Dream Solar Energies. Owner: Er. Moin Hamdani. New Islampura, Malegaon, Dist. Nashik, Maharashtra. All rights reserved.</p>
+      <div class="cert-badges">
+        <span class="cert-badge">NABCEP Certified</span>
+        <span class="cert-badge">BBB A+</span>
+        <span class="cert-badge">ISO 9001</span>
+        <span class="cert-badge">EnergyStar Partner</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="back-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+<script>
+  /* NAV scroll */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+    document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
+  });
+
+  /* Hamburger */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  /* Back to top */
+  function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+  /* FAQ Accordion */
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* Savings Calculator */
+  function calcSavings() {
+    const bill      = parseFloat(document.getElementById('bill').value) || 200;
+    const sunHours  = parseFloat(document.getElementById('sunHours').value);
+    const propType  = document.getElementById('propType').value;
+    const roofSqft  = parseFloat(document.getElementById('roofSize').value) || 1500;
+
+    const annualBill  = bill * 12;
+    let savings       = annualBill * 0.88;   // ~88% offset
+    const sysKW       = Math.min(roofSqft / 100, 20);
+    const over25      = savings * 25 * 0.85; // account for slight degradation
+    const resultEl    = document.getElementById('calcResult');
+    const numEl       = document.getElementById('resultNum');
+    const subEl       = document.getElementById('resultSub');
+
+    numEl.textContent = '$' + Math.round(savings).toLocaleString();
+    subEl.textContent = `Over 25 years: $${Math.round(over25).toLocaleString()} | Est. System Size: ${sysKW.toFixed(1)} kW`;
+    resultEl.style.display = 'block';
+    resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  /* Query form submit */
+  function submitQuery(e) {
+    e.preventDefault();
+    const btn = e.target;
+    const name = document.getElementById('q-name').value.trim();
+    const phone = document.getElementById('q-phone').value.trim();
+    const address = document.getElementById('q-address').value.trim();
+    const kw = document.getElementById('q-kw').value;
+    const purpose = document.getElementById('q-purpose').value;
+    if (!name || !phone || !address || !kw || !purpose) {
+      btn.textContent = '⚠️ Please fill all required fields.';
+      btn.style.background = 'linear-gradient(135deg,#e74c3c,#c0392b)';
+      setTimeout(() => { btn.textContent = 'Submit My Query ➔'; btn.style.background = ''; }, 3000);
+      return;
+    }
+    btn.textContent = '✓ Query Submitted! We\'ll contact you shortly.';
+    btn.style.background = 'linear-gradient(135deg,#2ecc71,#27ae60)';
+    setTimeout(() => { btn.textContent = 'Submit My Query ➔'; btn.style.background = ''; }, 4500);
+  }
+
+  /* Form submit simulation */
+  function submitForm(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.textContent = '✓ Message Sent! We\'ll be in touch soon.';
+    btn.style.background = 'linear-gradient(135deg, #2B8FD4, #60B8F0)';
+    setTimeout(() => {
+      btn.textContent = 'Send My Request ➔';
+      btn.style.background = '';
+    }, 4000);
+  }
+
+  /* Intersection observer for fade-in */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .product-card, .testimonial-card, .step, .why-point, .team-card, .doc-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
