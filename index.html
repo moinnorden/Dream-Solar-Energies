@@ -134,6 +134,30 @@
     background-size: 60px 60px;
   }
   .hero-content { position: relative; z-index: 2; max-width: 640px; }
+
+  /* Hero brand mark */
+  .hero-brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.6rem, 7vw, 5.2rem);
+    line-height: 1;
+    letter-spacing: -.01em;
+    margin-bottom: 18px;
+    background: linear-gradient(100deg, var(--gold-lt) 0%, var(--gold) 28%, #fff7e6 48%, var(--gold) 68%, var(--gold-lt) 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--gold);
+    filter: drop-shadow(0 4px 28px rgba(244,168,32,.45));
+    animation: fadeUp .9s ease both, brandShine 6s linear infinite;
+    position: relative;
+    display: inline-block;
+  }
+  @keyframes brandShine {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 220% 50%; }
+  }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(244,168,32,.15); border: 1px solid rgba(244,168,32,.4);
@@ -204,6 +228,39 @@
   body.night-mode .contact-form input, body.night-mode .contact-form select, body.night-mode .contact-form textarea {
     background: #111e30 !important;
   }
+  /* Improved text visibility in night mode */
+  body.night-mode .service-learn,
+  body.night-mode .faq-q:hover,
+  body.night-mode .team-body .team-role,
+  body.night-mode strong[style*="gold-dk"] {
+    color: var(--gold-lt) !important;
+  }
+  body.night-mode .why-badge-float strong,
+  body.night-mode .contact-item-text strong,
+  body.night-mode .team-body h3,
+  body.night-mode .faq-q,
+  body.night-mode .contact-info h2,
+  body.night-mode .service-card h3,
+  body.night-mode .product-body h3 {
+    color: #e8f0ff;
+  }
+  body.night-mode p,
+  body.night-mode .why-point-text p,
+  body.night-mode .service-card p,
+  body.night-mode .product-body p,
+  body.night-mode .faq-a-inner,
+  body.night-mode .contact-item-text span,
+  body.night-mode .section-sub {
+    color: #9bb0d4;
+  }
+  body.night-mode .skill-tag,
+  body.night-mode .spec-pill {
+    border: 1px solid rgba(255,255,255,.1);
+  }
+  body.night-mode .team-contact-pill {
+    background: #0d1e33; border-color: rgba(255,255,255,.12); color: #c8d8f0;
+  }
+  body.night-mode .why-image-placeholder span { color: #9bb0d4 !important; }
 
   /* ── WHY SOLAR ── */
   #why { background: var(--off); }
@@ -513,6 +570,7 @@
 
   <div class="container">
     <div class="hero-content">
+      <div class="hero-brand">Dream Solar</div>
       <div class="hero-badge">
         <span></span> Trusted Solar Partner Since 2015
       </div>
