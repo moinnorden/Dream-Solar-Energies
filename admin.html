@@ -527,16 +527,16 @@ const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db   = getFirestore(app);
 
-// ── ADMIN GUARD ── only allow admin@dreamsolarenergies.com or check Firestore role ──
+// ── ADMIN GUARD ── only allow users with role:'admin' in Firestore ──
 onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = 'login.html'; return; }
   // Check admin role in Firestore
   const uDoc = await getDoc(doc(db, 'users', user.uid));
   const role = uDoc.exists() ? uDoc.data().role : 'user';
   if (role !== 'admin') {
-    // For demo: allow any logged in user to view dashboard
-    // In production: uncomment below to restrict
-    // window.location.href = 'dream-solar-energies.html'; return;
+    alert('This account does not have admin access.');
+    window.location.href = 'index.html';
+    return;
   }
   const name = user.displayName || user.email.split('@')[0];
   document.getElementById('adminName').textContent = name;

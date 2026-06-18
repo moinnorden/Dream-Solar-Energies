@@ -403,8 +403,9 @@ function friendlyError(code) {
     'auth/invalid-credential': 'Invalid email or password.',
     'auth/too-many-requests': 'Too many attempts. Please wait a moment.',
     'auth/network-request-failed': 'Network error. Check your connection.',
+    'permission-denied': 'Signed in, but the database rejected the request (permission-denied). Check Firestore security rules.',
   };
-  return map[code] || 'Something went wrong. Please try again.';
+  return map[code] || `Something went wrong (${code || 'unknown error'}). Please try again.`;
 }
 </script>
 <script>
