@@ -1482,21 +1482,28 @@
     }, 4000);
   }
 
-  /* Intersection observer for fade-in */
-  const observer = new IntersectionObserver((entries) => {
+  /* Scroll reveal — fade + rise smoothly into view as the page is scrolled */
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.style.opacity = '1';
         entry.target.style.transform = 'translateY(0)';
+        revealObserver.unobserve(entry.target); // animate once, then leave it alone
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.service-card, .product-card, .testimonial-card, .step, .why-point, .team-card, .doc-card, .gallery-item, .install-card').forEach(el => {
+  const revealSelectors = [
+    '.service-card', '.product-card', '.testimonial-card', '.step', '.why-point',
+    '.team-card', '.doc-card', '.gallery-item', '.install-card',
+    '.section-tag', '.section-title', '.section-sub',
+    '.faq-item', '.contact-form', '.contact-item'
+  ];
+  document.querySelectorAll(revealSelectors.join(',')).forEach((el, i) => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = `opacity 0.7s cubic-bezier(.22,.9,.32,1) ${(i % 6) * 0.07}s, transform 0.7s cubic-bezier(.22,.9,.32,1) ${(i % 6) * 0.07}s`;
+    revealObserver.observe(el);
   });
 
   /* ── Brand trust marquee ── */
