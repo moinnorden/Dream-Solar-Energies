@@ -376,7 +376,7 @@ tr:hover td{background:rgba(244,168,32,.03);}
         </div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Customer</th><th>Address</th><th>System (kW)</th><th>Amount (₹)</th><th>Engineer</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Photo</th><th>Customer</th><th>Address</th><th>System (kW)</th><th>Amount (₹)</th><th>Engineer</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody id="installTbody"><tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr></tbody>
           </table>
         </div>
@@ -464,13 +464,15 @@ tr:hover td{background:rgba(244,168,32,.03);}
       <div class="form-group"><label>Address *</label><input type="text" id="inst-addr" placeholder="Installation address"/></div>
       <div class="form-group"><label>System Size (kW) *</label><input type="number" id="inst-kw" placeholder="e.g. 3"/></div>
       <div class="form-group"><label>Amount (₹)</label><input type="number" id="inst-amt" placeholder="e.g. 190000"/></div>
+      <div class="form-group"><label>Project Photo URL</label><input type="url" id="inst-photo" placeholder="https://example.com/photo.jpg"/></div>
+      <div class="form-group"><label>Short Description</label><textarea id="inst-desc" placeholder="e.g. 5kW rooftop system installed for a 3BHK home, cutting their monthly bill by 90%."></textarea></div>
       <div class="form-group"><label>Engineer</label>
         <select id="inst-eng"><option>Er. Ibrahim Bafati</option><option>Er. Tariq Khanna</option><option>Er. Moin Hamdani</option></select>
       </div>
       <div class="form-group"><label>Status</label>
         <select id="inst-status"><option value="planned">Planned</option><option value="in-progress">In Progress</option><option value="completed">Completed</option></select>
       </div>
-      <div class="form-group"><label>Notes</label><textarea id="inst-notes" placeholder="Any additional notes…"></textarea></div>
+      <div class="form-group"><label>Internal Notes</label><textarea id="inst-notes" placeholder="Any additional notes…"></textarea></div>
     </div>
     <div class="modal-footer">
       <button class="btn-sm btn-sm-outline" onclick="closeModal('modalAddInstall')">Cancel</button>
@@ -701,9 +703,10 @@ async function loadInstallations() {
 }
 function renderInstallations(list) {
   const tb = document.getElementById('installTbody');
-  if (!list.length) { tb.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:40px;">No installations recorded yet. Add your first one!</td></tr>'; return; }
+  if (!list.length) { tb.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--muted);padding:40px;">No installations recorded yet. Add your first one!</td></tr>'; return; }
   tb.innerHTML = list.map(i=>`
     <tr>
+      <td>${i.photoUrl ? `<img src="${escHtml(i.photoUrl)}" alt="" style="width:48px;height:48px;border-radius:8px;object-fit:cover;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/><div style="display:none;width:48px;height:48px;border-radius:8px;background:var(--off);align-items:center;justify-content:center;font-size:1.2rem;">🏠</div>` : `<div style="width:48px;height:48px;border-radius:8px;background:var(--off);display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🏠</div>`}</td>
       <td><strong>${escHtml(i.customerName||'—')}</strong></td>
       <td>${escHtml(i.address||'—')}</td>
       <td><strong>${escHtml(i.kw||'—')} kW</strong></td>
@@ -714,7 +717,12 @@ function renderInstallations(list) {
       <td><button class="btn-sm btn-sm-danger" onclick="deleteInstall('${i.id}')">🗑</button></td>
     </tr>`).join('');
 }
-window.openAddInstall = () => document.getElementById('modalAddInstall').classList.add('open');
+window.openAddInstall = () => {
+  ['inst-name','inst-addr','inst-kw','inst-amt','inst-photo','inst-desc','inst-notes'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('inst-eng').selectedIndex = 0;
+  document.getElementById('inst-status').value = 'planned';
+  document.getElementById('modalAddInstall').classList.add('open');
+};
 window.saveInstallation = async () => {
   const name = document.getElementById('inst-name').value.trim();
   const addr = document.getElementById('inst-addr').value.trim();
@@ -723,6 +731,8 @@ window.saveInstallation = async () => {
   await addDoc(collection(db,'installations'),{
     customerName:name, address:addr, kw:kw,
     amount: document.getElementById('inst-amt').value||190000,
+    photoUrl: document.getElementById('inst-photo').value.trim(),
+    description: document.getElementById('inst-desc').value.trim(),
     engineer: document.getElementById('inst-eng').value,
     status: document.getElementById('inst-status').value,
     notes: document.getElementById('inst-notes').value,

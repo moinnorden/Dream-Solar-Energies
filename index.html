@@ -139,10 +139,10 @@
   .hero-brand {
     font-family: 'Playfair Display', serif;
     font-weight: 900;
-    font-size: clamp(2.6rem, 7vw, 5.2rem);
+    font-size: clamp(2.9rem, 7.8vw, 5.8rem);
     line-height: 1;
     letter-spacing: -.01em;
-    margin-bottom: 18px;
+    margin-bottom: 10px;
     background: linear-gradient(100deg, var(--gold-lt) 0%, var(--gold) 28%, #fff7e6 48%, var(--gold) 68%, var(--gold-lt) 100%);
     background-size: 220% 100%;
     -webkit-background-clip: text;
@@ -158,23 +158,34 @@
     0%   { background-position: 0% 50%; }
     100% { background-position: 220% 50%; }
   }
+  .hero-slogan {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.05rem, 2.4vw, 1.5rem);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: .92;
+    margin-bottom: 32px;
+    animation: fadeUp .9s .1s ease both;
+  }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(244,168,32,.15); border: 1px solid rgba(244,168,32,.4);
-    color: var(--gold-lt); padding: 8px 18px; border-radius: 100px;
-    font-size: .85rem; font-weight: 600; letter-spacing: .04em;
-    margin-bottom: 28px; animation: fadeUp .8s ease both;
+    color: var(--gold-lt); padding: 6px 16px; border-radius: 100px;
+    font-size: .76rem; font-weight: 600; letter-spacing: .04em;
+    margin-bottom: 22px; animation: fadeUp .8s .15s ease both;
   }
-  .hero-badge span { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); animation: blink 1.5s infinite; }
+  .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: blink 1.5s infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
-  .hero-title { color: var(--white); margin-bottom: 24px; animation: fadeUp .8s .15s ease both; }
+  .hero-title { color: var(--white); margin-bottom: 18px; animation: fadeUp .8s .2s ease both; font-size: clamp(1.5rem, 3.4vw, 2.3rem); opacity: .85; }
   .hero-title em { color: var(--gold); font-style: normal; }
-  .hero-desc { color: rgba(255,255,255,.75); font-size: 1.1rem; margin-bottom: 40px; animation: fadeUp .8s .3s ease both; }
+  .hero-desc { color: rgba(255,255,255,.62); font-size: .94rem; margin-bottom: 32px; animation: fadeUp .8s .3s ease both; }
   .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp .8s .45s ease both; }
-  .hero-stats { display: flex; gap: 40px; margin-top: 64px; animation: fadeUp .8s .6s ease both; flex-wrap: wrap; }
-  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--white); line-height: 1; }
+  .hero-stats { display: flex; gap: 40px; margin-top: 52px; animation: fadeUp .8s .6s ease both; flex-wrap: wrap; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--white); line-height: 1; }
   .stat-num span { color: var(--gold); }
-  .stat-label { font-size: .82rem; color: rgba(255,255,255,.5); margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; }
+  .stat-label { font-size: .74rem; color: rgba(255,255,255,.45); margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
 
   /* Slide dots */
@@ -213,10 +224,18 @@
   body.night-mode .testimonial-card,
   body.night-mode .faq-item,
   body.night-mode .contact-form,
-  body.night-mode .query-wrap {
+  body.night-mode .query-wrap,
+  body.night-mode .install-card {
     background: #0d1e33;
     border-color: rgba(255,255,255,.07);
   }
+  body.night-mode #installations { background: #0a1520; }
+  body.night-mode #brands { background: #0a1520; }
+  body.night-mode .install-name { color: #e8f0ff; }
+  body.night-mode .install-addr,
+  body.night-mode .install-desc { color: #9bb0d4; }
+  body.night-mode .brand-logo-item { color: #7090b8; }
+  body.night-mode .brand-logo-item:hover { color: var(--gold-lt); }
   body.night-mode .why-badge-float,
   body.night-mode .team-card { background: #0d1e33; }
   body.night-mode .spec-pill,
@@ -331,6 +350,32 @@
   .product-body p  { font-size: .88rem; margin-bottom: 16px; }
   .product-specs { display: flex; gap: 12px; flex-wrap: wrap; }
   .spec-pill { background: var(--off); border-radius: 100px; padding: 4px 12px; font-size: .78rem; font-weight: 500; color: var(--muted); }
+
+  /* ── RECENT INSTALLATIONS ── */
+  #installations { background: var(--off); }
+  .installs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+  .install-card { background: var(--white); border-radius: 20px; overflow: hidden; border: 1px solid rgba(11,23,40,.07); transition: var(--transition); }
+  .install-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(11,23,40,.1); }
+  .install-img { aspect-ratio: 4/3; position: relative; overflow: hidden; background: linear-gradient(160deg, var(--navy-lt), var(--navy-mid)); }
+  .install-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+  .install-card:hover .install-img img { transform: scale(1.05); }
+  .install-kw-badge { position: absolute; top: 14px; right: 14px; z-index: 1; background: var(--gold); color: var(--navy); font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; }
+  .install-body { padding: 22px 24px; }
+  .install-name { color: var(--text); margin-bottom: 4px; font-size: 1.05rem; }
+  .install-addr { font-size: .8rem; color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
+  .install-desc { font-size: .9rem; color: var(--muted); line-height: 1.6; }
+  .installs-empty { text-align: center; color: var(--muted); padding: 48px 24px; font-size: .95rem; }
+
+  /* ── BRAND TRUST MARQUEE ── */
+  #brands { background: var(--white); padding: 56px 0; overflow: hidden; }
+  .brands-label { text-align: center; font-size: .82rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
+  .brand-marquee { position: relative; width: 100%; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .brand-track { display: flex; gap: 64px; width: max-content; animation: brandScroll 28s linear infinite; align-items: center; }
+  .brand-marquee:hover .brand-track { animation-play-state: paused; }
+  .brand-logo-item { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: var(--muted); opacity: .55; white-space: nowrap; display: flex; align-items: center; gap: 8px; transition: opacity .25s, color .25s; }
+  .brand-logo-item:hover { opacity: 1; color: var(--gold-dk); }
+  @keyframes brandScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (max-width: 768px) { .installs-grid { grid-template-columns: 1fr; } }
 
   /* ── TESTIMONIALS ── */
   #testimonials { background: var(--white); }
@@ -570,7 +615,8 @@
 
   <div class="container">
     <div class="hero-content">
-      <div class="hero-brand">Dream Solar</div>
+      <div class="hero-brand">DREAM SOLAR</div>
+      <div class="hero-slogan">Power Your Future</div>
       <div class="hero-badge">
         <span></span> Trusted Solar Partner Since 2015
       </div>
@@ -827,18 +873,43 @@
     <!-- Photo Gallery Strip -->
     <div class="gallery-strip">
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=500&q=80" alt="Solar farm at sunset" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&q=80" alt="Solar farm at sunset" loading="lazy" />
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1548075983-0e9e8d4ff5e2?w=500&q=80" alt="Rooftop solar installation" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=500&q=80" alt="Rooftop solar installation" loading="lazy" />
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1523294557-4e30e65a3cdb?w=500&q=80" alt="Solar panels close up" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=500&q=80" alt="Solar panels close up" loading="lazy" />
       </div>
       <div class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1545208500-fc3a41bfb3c5?w=500&q=80" alt="Solar installation team" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1559302995-f1d6e557a8a1?w=500&q=80" alt="Solar installation team" loading="lazy" />
       </div>
     </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ RECENT INSTALLATIONS ═══════════════ -->
+<section id="installations" class="section">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">Our Work</div>
+      <h2 class="section-title">Recent Installations</h2>
+    </div>
+    <p class="section-sub">A glimpse at real Dream Solar projects completed for homes and businesses near you.</p>
+    <div class="installs-grid" id="installsGrid">
+      <div class="installs-empty">Loading recent installations…</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ BRAND TRUST MARQUEE ═══════════════ -->
+<section id="brands">
+  <div class="container">
+    <div class="brands-label">Trusted Components From Industry-Leading Brands</div>
+  </div>
+  <div class="brand-marquee">
+    <div class="brand-track" id="brandTrack"></div>
   </div>
 </section>
 
@@ -1271,6 +1342,19 @@
 
 <!-- ═══════════════ JAVASCRIPT ═══════════════ -->
 <script>
+  /* Image fallback — replaces any broken photo with a styled placeholder instead of a broken-icon */
+  document.querySelectorAll('img:not(.logo-img):not(.footer-logo-img)').forEach(img => {
+    img.addEventListener('error', function handleErr() {
+      this.removeEventListener('error', handleErr);
+      this.style.objectFit = 'contain';
+      this.style.background = 'linear-gradient(160deg, var(--navy-lt), var(--navy-mid))';
+      this.style.padding = '20%';
+      this.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="22" fill="none" stroke="%23F4A820" stroke-width="3"/><line x1="50" y1="10" x2="50" y2="20" stroke="%23F4A820" stroke-width="3"/><line x1="50" y1="80" x2="50" y2="90" stroke="%23F4A820" stroke-width="3"/><line x1="10" y1="50" x2="20" y2="50" stroke="%23F4A820" stroke-width="3"/><line x1="80" y1="50" x2="90" y2="50" stroke="%23F4A820" stroke-width="3"/></svg>'
+      );
+    }, { once: true });
+  });
+
   /* NAV scroll */
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -1394,12 +1478,71 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.service-card, .product-card, .testimonial-card, .step, .why-point, .team-card, .doc-card, .gallery-item').forEach(el => {
+  document.querySelectorAll('.service-card, .product-card, .testimonial-card, .step, .why-point, .team-card, .doc-card, .gallery-item, .install-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(el);
   });
+
+  /* ── Brand trust marquee ── */
+  const BRANDS = ['☀️ Tata Power Solar', '⚡ Waaree', '🔆 Adani Solar', '💡 Luminous', '🔋 Loom Solar'];
+  const brandTrack = document.getElementById('brandTrack');
+  if (brandTrack) {
+    const html = BRANDS.map(b => `<div class="brand-logo-item">${b}</div>`).join('');
+    brandTrack.innerHTML = html + html; // duplicated for seamless loop
+  }
+</script>
+
+<!-- ═══════════════ INSTALLATIONS (Firebase) ═══════════════ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs, query, orderBy, limit }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBNQSVzXZBtvWQO8RNHOk_ishTpqLLLIrM",
+  authDomain: "dream-solar.firebaseapp.com",
+  projectId: "dream-solar",
+  storageBucket: "dream-solar.firebasestorage.app",
+  messagingSenderId: "199990013532",
+  appId: "1:199990013532:web:36fd0adf30758694b40099",
+  measurementId: "G-GM68FKG2H3"
+};
+
+function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+async function loadInstallationsShowcase() {
+  const grid = document.getElementById('installsGrid');
+  if (!grid) return;
+  try {
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+    const snap = await getDocs(query(collection(db, 'installations'), orderBy('createdAt', 'desc'), limit(6)));
+    const all = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const completed = all.filter(i => i.status === 'completed');
+    const list = completed.length ? completed : all;
+    if (!list.length) {
+      grid.innerHTML = '<div class="installs-empty">More project showcases coming soon. Check back shortly!</div>';
+      return;
+    }
+    grid.innerHTML = list.map(i => `
+      <div class="install-card">
+        <div class="install-img">
+          ${i.photoUrl ? `<img src="${escHtml(i.photoUrl)}" alt="${escHtml(i.customerName||'Solar installation')}" loading="lazy" />` : ''}
+          ${i.kw ? `<div class="install-kw-badge">${escHtml(i.kw)} kW</div>` : ''}
+        </div>
+        <div class="install-body">
+          <h3 class="install-name">${escHtml(i.customerName || 'Valued Customer')}</h3>
+          ${i.address ? `<div class="install-addr">📍 ${escHtml(i.address)}</div>` : ''}
+          ${i.description ? `<p class="install-desc">${escHtml(i.description)}</p>` : ''}
+        </div>
+      </div>`).join('');
+  } catch (e) {
+    grid.innerHTML = '<div class="installs-empty">Project showcase coming soon. Check back shortly!</div>';
+  }
+}
+loadInstallationsShowcase();
 </script>
 </body>
 </html>
