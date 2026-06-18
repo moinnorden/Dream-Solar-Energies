@@ -234,8 +234,9 @@
   body.night-mode .install-name { color: #e8f0ff; }
   body.night-mode .install-addr,
   body.night-mode .install-desc { color: #9bb0d4; }
-  body.night-mode .brand-logo-item { color: #7090b8; }
-  body.night-mode .brand-logo-item:hover { color: var(--gold-lt); }
+  body.night-mode .brand-wordmark { opacity: .6; filter: grayscale(1) brightness(1.6); }
+  body.night-mode .brand-wordmark:hover { opacity: 1; filter: grayscale(0) brightness(1); }
+  body.night-mode .bw-sub { color: #7090b8; }
   body.night-mode .why-badge-float,
   body.night-mode .team-card { background: #0d1e33; }
   body.night-mode .spec-pill,
@@ -368,12 +369,23 @@
 
   /* ── BRAND TRUST MARQUEE ── */
   #brands { background: var(--white); padding: 56px 0; overflow: hidden; }
-  .brands-label { text-align: center; font-size: .82rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
+  .brands-label { text-align: center; font-size: .82rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 36px; }
   .brand-marquee { position: relative; width: 100%; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .brand-track { display: flex; gap: 64px; width: max-content; animation: brandScroll 28s linear infinite; align-items: center; }
+  .brand-track { display: flex; gap: 72px; width: max-content; animation: brandScroll 30s linear infinite; align-items: center; }
   .brand-marquee:hover .brand-track { animation-play-state: paused; }
-  .brand-logo-item { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: var(--muted); opacity: .55; white-space: nowrap; display: flex; align-items: center; gap: 8px; transition: opacity .25s, color .25s; }
-  .brand-logo-item:hover { opacity: 1; color: var(--gold-dk); }
+  .brand-wordmark { white-space: nowrap; display: flex; flex-direction: column; align-items: center; opacity: .5; filter: grayscale(1); transition: opacity .3s, filter .3s, transform .3s; cursor: default; }
+  .brand-wordmark:hover { opacity: 1; filter: grayscale(0); transform: translateY(-2px); }
+  .brand-wordmark .bw-main { font-size: 1.5rem; line-height: 1; }
+  .brand-wordmark .bw-sub { font-size: .62rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  /* Per-brand logotype styling */
+  .bw-tata .bw-main { font-family: 'DM Sans', sans-serif; font-weight: 800; color: #1A2540; letter-spacing: -.01em; }
+  .bw-tata .bw-main span { color: var(--sky); }
+  .bw-waaree .bw-main { font-family: 'Playfair Display', serif; font-weight: 900; font-style: italic; color: #C0392B; letter-spacing: -.01em; }
+  .bw-adani .bw-main { font-family: 'DM Sans', sans-serif; font-weight: 800; color: #1B4F72; letter-spacing: .01em; }
+  .bw-adani .bw-main span { color: var(--gold-dk); }
+  .bw-luminous .bw-main { font-family: 'DM Sans', sans-serif; font-weight: 700; color: #2C3E50; letter-spacing: .04em; }
+  .bw-luminous .bw-main span { color: #F39C12; font-weight: 800; }
+  .bw-loom .bw-main { font-family: 'Playfair Display', serif; font-weight: 700; color: #145A32; letter-spacing: -.01em; }
   @keyframes brandScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (max-width: 768px) { .installs-grid { grid-template-columns: 1fr; } }
 
@@ -1486,10 +1498,20 @@
   });
 
   /* ── Brand trust marquee ── */
-  const BRANDS = ['☀️ Tata Power Solar', '⚡ Waaree', '🔆 Adani Solar', '💡 Luminous', '🔋 Loom Solar'];
+  const BRANDS = [
+    { cls: 'bw-tata',     main: 'TATA<span>POWER</span>', sub: 'Solar' },
+    { cls: 'bw-waaree',   main: 'Waaree',                 sub: 'Energies' },
+    { cls: 'bw-adani',    main: 'ADANI<span>SOLAR</span>', sub: 'Energy' },
+    { cls: 'bw-luminous', main: 'LUMIN<span>OUS</span>',  sub: 'Power Technologies' },
+    { cls: 'bw-loom',     main: 'Loom Solar',              sub: 'Panels & Batteries' }
+  ];
   const brandTrack = document.getElementById('brandTrack');
   if (brandTrack) {
-    const html = BRANDS.map(b => `<div class="brand-logo-item">${b}</div>`).join('');
+    const html = BRANDS.map(b => `
+      <div class="brand-wordmark ${b.cls}">
+        <div class="bw-main">${b.main}</div>
+        <div class="bw-sub">${b.sub}</div>
+      </div>`).join('');
     brandTrack.innerHTML = html + html; // duplicated for seamless loop
   }
 </script>
