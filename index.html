@@ -27,6 +27,7 @@
     --white:     #FAFCFF;
     --off:       #F0F4FA;
     --text:      #1A2540;
+    --on-dark:   #ffffff; /* always-white text/icons on permanently-dark sections, never flips in night mode */
     --muted:     #5A6A88;
     --radius:    14px;
     --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
@@ -61,13 +62,13 @@
   }
   .btn-primary { background: linear-gradient(135deg, var(--gold), var(--gold-lt)); color: var(--navy); box-shadow: 0 6px 24px rgba(244,168,32,.35); }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(244,168,32,.5); }
-  .btn-outline { background: transparent; border: 2px solid rgba(255,255,255,.5); color: var(--white); }
+  .btn-outline { background: transparent; border: 2px solid rgba(255,255,255,.5); color: var(--on-dark); }
   .btn-outline:hover { background: rgba(255,255,255,.1); }
 
   /* ── SOLAR SIZE GUIDE ── */
   #solar-guide { background: var(--navy); }
   #solar-guide .section-tag { background: rgba(244,168,32,.15); color: var(--gold); }
-  #solar-guide h2 { color: var(--white); }
+  #solar-guide h2 { color: var(--on-dark); }
   .guide-subtitle { color: rgba(255,255,255,.6); text-align: center; margin-bottom: 52px; font-size: 1rem; }
   .guide-table-wrap { overflow-x: auto; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
   .guide-table { width: 100%; border-collapse: collapse; min-width: 700px; }
@@ -84,7 +85,7 @@
   .guide-app { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; padding: 4px 10px; font-size: .78rem; color: rgba(255,255,255,.75); white-space: nowrap; }
   .guide-bill { font-weight: 700; color: var(--gold-lt); font-size: .92rem; }
   .guide-why { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-top: 52px; }
-  .guide-why-pill { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 100px; padding: 12px 22px; color: var(--white); font-size: .88rem; font-weight: 500; }
+  .guide-why-pill { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 100px; padding: 12px 22px; color: var(--on-dark); font-size: .88rem; font-weight: 500; }
   .guide-why-pill span { font-size: 1.2rem; }
 
   /* ── ON-GRID SECTION ── */
@@ -108,18 +109,18 @@
   .subsidy-row { margin-bottom: 14px; }
   .subsidy-row-label { font-size: .76rem; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
   .subsidy-card-3 .subsidy-row-label { color: rgba(11,23,40,.55); }
-  .subsidy-amount { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--white); }
+  .subsidy-amount { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--on-dark); }
   .subsidy-card-3 .subsidy-amount { color: var(--navy); }
   .ongrid-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
-  .ongrid-savings-box { background: var(--navy); border-radius: 18px; padding: 32px; color: var(--white); }
-  .ongrid-savings-box h3 { color: var(--white); margin-bottom: 16px; font-size: 1.2rem; }
+  .ongrid-savings-box { background: var(--navy); border-radius: 18px; padding: 32px; color: var(--on-dark); }
+  .ongrid-savings-box h3 { color: var(--on-dark); margin-bottom: 16px; font-size: 1.2rem; }
   .savings-percent { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--gold); line-height: 1; }
   .savings-desc { color: rgba(255,255,255,.55); font-size: .88rem; margin-top: 8px; }
   .savings-benefits { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
   .savings-benefit-item { display: flex; align-items: center; gap: 10px; font-size: .9rem; color: rgba(255,255,255,.8); }
   .savings-benefit-item::before { content: '✓'; width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: var(--navy); display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; flex-shrink: 0; }
-  .net-metering-box { background: linear-gradient(135deg, var(--sky), var(--sky-lt)); border-radius: 18px; padding: 32px; color: var(--white); }
-  .net-metering-box h3 { color: var(--white); margin-bottom: 10px; }
+  .net-metering-box { background: linear-gradient(135deg, var(--sky), var(--sky-lt)); border-radius: 18px; padding: 32px; color: var(--on-dark); }
+  .net-metering-box h3 { color: var(--on-dark); margin-bottom: 10px; }
   .net-metering-box p { color: rgba(255,255,255,.85); font-size: .92rem; }
   .payback-badge { margin-top: 20px; background: rgba(255,255,255,.15); border-radius: 12px; padding: 16px 20px; }
   .payback-badge strong { font-family: 'Playfair Display', serif; font-size: 1.1rem; display: block; margin-bottom: 4px; }
@@ -149,7 +150,7 @@
   .nav-cta { margin-left: 8px; }
 
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-  .hamburger span { display: block; width: 26px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
+  .hamburger span { display: block; width: 26px; height: 2px; background: var(--on-dark); border-radius: 2px; transition: var(--transition); }
   .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -161,7 +162,7 @@
     z-index: 998; box-shadow: 0 8px 32px rgba(0,0,0,.4); padding-top: 80px;
   }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a { color: var(--white); text-decoration: none; font-size: 1.05rem; font-weight: 500; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .mobile-menu a { color: var(--on-dark); text-decoration: none; font-size: 1.05rem; font-weight: 500; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
 
   /* ── HERO SLIDESHOW ── */
   #hero {
@@ -189,6 +190,7 @@
   .hero-slide-2 { background-image: url('https://res.cloudinary.com/dbnujwodr/image/upload/v1781704149/1324_spi8ig.jpg?w=1600&q=80'); }
   .hero-slide-3 { background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80'); }
   .hero-slide-4 { background-image: url('https://res.cloudinary.com/dbnujwodr/image/upload/v1781704457/raphael-cruz-IwY-27ceRCA-unsplash_a7a2b5.jpg?w=1600&q=80'); }
+
   @keyframes kenBurns {
     from { transform: scale(1); }
     to   { transform: scale(1.06); }
@@ -234,7 +236,7 @@
     font-size: clamp(1.05rem, 2.4vw, 1.5rem);
     letter-spacing: .22em;
     text-transform: uppercase;
-    color: var(--white);
+    color: var(--on-dark);
     opacity: .92;
     margin-bottom: 32px;
     animation: fadeUp .9s .1s ease both;
@@ -248,12 +250,12 @@
   }
   .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: blink 1.5s infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
-  .hero-title { color: var(--white); margin-bottom: 18px; animation: fadeUp .8s .2s ease both; font-size: clamp(1.5rem, 3.4vw, 2.3rem); opacity: .85; }
+  .hero-title { color: var(--on-dark); margin-bottom: 18px; animation: fadeUp .8s .2s ease both; font-size: clamp(1.5rem, 3.4vw, 2.3rem); opacity: .85; }
   .hero-title em { color: var(--gold); font-style: normal; }
   .hero-desc { color: rgba(255,255,255,.62); font-size: .94rem; margin-bottom: 32px; animation: fadeUp .8s .3s ease both; }
   .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp .8s .45s ease both; }
   .hero-stats { display: flex; gap: 40px; margin-top: 52px; animation: fadeUp .8s .6s ease both; flex-wrap: wrap; }
-  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--white); line-height: 1; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--on-dark); line-height: 1; }
   .stat-num span { color: var(--gold); }
   .stat-label { font-size: .74rem; color: rgba(255,255,255,.45); margin-top: 4px; text-transform: uppercase; letter-spacing: .06em; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
@@ -401,13 +403,13 @@
   /* ── PROCESS ── */
   #process { background: var(--navy); }
   #process .section-tag { background: rgba(244,168,32,.15); color: var(--gold); }
-  #process h2 { color: var(--white); }
+  #process h2 { color: var(--on-dark); }
   #process .section-sub p { color: rgba(255,255,255,.55); }
   .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; position: relative; margin-top: 64px; }
   .steps::before { content: ''; position: absolute; top: 36px; left: calc(12.5% + 20px); right: calc(12.5% + 20px); height: 2px; background: linear-gradient(90deg, var(--gold), var(--sky)); z-index: 0; }
   .step { text-align: center; position: relative; z-index: 1; }
   .step-num { width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 24px; background: linear-gradient(135deg, var(--gold), var(--gold-lt)); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--navy); box-shadow: 0 6px 24px rgba(244,168,32,.35); }
-  .step h3 { color: var(--white); font-size: 1.05rem; margin-bottom: 10px; }
+  .step h3 { color: var(--on-dark); font-size: 1.05rem; margin-bottom: 10px; }
   .step p   { color: rgba(255,255,255,.5); font-size: .88rem; }
 
   /* ── PRODUCTS ── */
@@ -471,14 +473,14 @@
   .stars { color: var(--gold); font-size: 1.1rem; margin-bottom: 16px; }
   .testimonial-card blockquote { font-size: .94rem; color: var(--text); font-style: italic; line-height: 1.7; margin-bottom: 24px; }
   .reviewer { display: flex; align-items: center; gap: 12px; }
-  .reviewer-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--sky)); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 700; color: var(--white); font-size: 1rem; }
+  .reviewer-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--sky)); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 700; color: var(--on-dark); font-size: 1rem; }
   .reviewer-name { font-weight: 600; color: var(--text); font-size: .92rem; }
   .reviewer-loc  { font-size: .78rem; color: var(--muted); }
 
   /* ── SAVINGS CALCULATOR ── */
   #calculator { background: var(--navy); }
   #calculator .section-tag { background: rgba(244,168,32,.15); color: var(--gold); }
-  #calculator h2, #calculator .section-title { color: var(--white); }
+  #calculator h2, #calculator .section-title { color: var(--on-dark); }
   .calc-wrap { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 28px; padding: 52px; max-width: 780px; margin: 0 auto; backdrop-filter: blur(12px); }
   .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 32px; }
   .form-group { margin-bottom: 24px; }
@@ -486,7 +488,7 @@
   .form-group input, .form-group select {
     width: 100%; padding: 14px 18px;
     background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
-    border-radius: 12px; color: var(--white);
+    border-radius: 12px; color: var(--on-dark);
     font-family: 'DM Sans', sans-serif; font-size: .98rem;
     outline: none; transition: border-color .2s; -webkit-appearance: none; appearance: none;
   }
@@ -537,7 +539,7 @@
   /* ── CTA BANNER ── */
   #cta-banner { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); padding: 80px 0; text-align: center; position: relative; overflow: hidden; }
   #cta-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(244,168,32,.12), transparent 60%); }
-  #cta-banner h2 { color: var(--white); position: relative; z-index: 1; margin-bottom: 16px; }
+  #cta-banner h2 { color: var(--on-dark); position: relative; z-index: 1; margin-bottom: 16px; }
   #cta-banner p  { color: rgba(255,255,255,.6); max-width: 500px; margin: 0 auto 36px; position: relative; z-index: 1; }
   .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
 
@@ -549,7 +551,7 @@
   .footer-socials { display: flex; gap: 12px; margin-top: 24px; }
   .social-btn { width: 38px; height: 38px; border-radius: 10px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.6); text-decoration: none; font-size: .95rem; transition: var(--transition); }
   .social-btn:hover { background: var(--gold); color: var(--navy); }
-  .footer-col h4 { color: var(--white); font-size: .9rem; font-weight: 700; margin-bottom: 20px; letter-spacing: .06em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; }
+  .footer-col h4 { color: var(--on-dark); font-size: .9rem; font-weight: 700; margin-bottom: 20px; letter-spacing: .06em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; }
   .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
   .footer-col ul li a { color: rgba(255,255,255,.45); text-decoration: none; font-size: .9rem; transition: color .2s; }
   .footer-col ul li a:hover { color: var(--gold); }
@@ -586,7 +588,7 @@
   .doc-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 36px 28px; text-align: center; transition: var(--transition); }
   .doc-card:hover { background: rgba(255,255,255,.08); transform: translateY(-4px); }
   .doc-icon { font-size: 3rem; margin-bottom: 20px; }
-  .doc-card h3 { color: var(--white); font-size: 1.15rem; margin-bottom: 12px; }
+  .doc-card h3 { color: var(--on-dark); font-size: 1.15rem; margin-bottom: 12px; }
   .doc-card p  { color: rgba(255,255,255,.55); font-size: .88rem; margin-bottom: 16px; }
   .doc-note { background: rgba(244,168,32,.15); border: 1px solid rgba(244,168,32,.25); color: var(--gold-lt); font-size: .78rem; font-weight: 600; padding: 6px 14px; border-radius: 100px; display: inline-block; }
   .docs-note-box { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 22px 28px; margin-top: 36px; display: flex; gap: 16px; align-items: flex-start; font-size: 1.3rem; }
@@ -877,7 +879,7 @@
   <div class="container">
     <div style="text-align:center">
       <div class="section-tag">System Size Guide</div>
-      <h2 class="section-title" style="color:var(--white)">How Much kW Solar Is Right For Your Home?</h2>
+      <h2 class="section-title" style="color:var(--on-dark)">How Much kW Solar Is Right For Your Home?</h2>
       <p class="guide-subtitle">A complete guide to smart solar choices — find the perfect system for your energy needs and budget.</p>
     </div>
 
@@ -1112,7 +1114,7 @@
   <div class="container">
     <div style="text-align:center">
       <div class="section-tag">How It Works</div>
-      <h2 class="section-title" style="color:var(--white)">Your Solar Journey in 4 Simple Steps</h2>
+      <h2 class="section-title" style="color:var(--on-dark)">Your Solar Journey in 4 Simple Steps</h2>
     </div>
     <p class="section-sub"><span style="color:rgba(255,255,255,.55)">We make going solar effortless. From your first call to the day you flip the switch, our team manages everything.</span></p>
     <div class="steps">
@@ -1303,7 +1305,7 @@
   <div class="container">
     <div style="text-align:center">
       <div class="section-tag" style="background:rgba(244,168,32,.15);color:var(--gold)">Documentation</div>
-      <h2 style="color:var(--white);margin-bottom:16px;">Documents Required for Installation</h2>
+      <h2 style="color:var(--on-dark);margin-bottom:16px;">Documents Required for Installation</h2>
       <p style="color:rgba(255,255,255,.55);max-width:520px;margin:0 auto 52px;">To process your solar installation smoothly, please keep the following documents ready. Our team will guide you through the submission process.</p>
     </div>
     <div class="docs-grid">
@@ -1328,7 +1330,7 @@
     </div>
     <div class="docs-note-box">
       <span>📌</span>
-      <p><strong style="color:var(--white)">Note:</strong> All documents should be in the name of the property owner. Our team will assist you if documents are in a family member's name. Additional documents may be required for commercial or agricultural installations. Contact us for a complete checklist.</p>
+      <p><strong style="color:var(--on-dark)">Note:</strong> All documents should be in the name of the property owner. Our team will assist you if documents are in a family member's name. Additional documents may be required for commercial or agricultural installations. Contact us for a complete checklist.</p>
     </div>
   </div>
 </section>
@@ -1384,7 +1386,7 @@
   <div class="container">
     <div style="text-align:center">
       <div class="section-tag">Savings Estimator</div>
-      <h2 class="section-title" style="color:var(--white)">How Much Could You Save?</h2>
+      <h2 class="section-title" style="color:var(--on-dark)">How Much Could You Save?</h2>
       <p style="color:rgba(255,255,255,.55);max-width:500px;margin:0 auto 48px;">Enter your details below for an instant estimate of your annual solar savings. No personal info required.</p>
     </div>
     <div class="calc-wrap">
