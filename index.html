@@ -5,16 +5,6 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="shortcut icon" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
-
- <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GM68FKG2H3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GM68FKG2H3');
-</script>
  
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -74,6 +64,75 @@
   .btn-outline { background: transparent; border: 2px solid rgba(255,255,255,.5); color: var(--white); }
   .btn-outline:hover { background: rgba(255,255,255,.1); }
 
+  /* ── SOLAR SIZE GUIDE ── */
+  #solar-guide { background: var(--navy); }
+  #solar-guide .section-tag { background: rgba(244,168,32,.15); color: var(--gold); }
+  #solar-guide h2 { color: var(--white); }
+  .guide-subtitle { color: rgba(255,255,255,.6); text-align: center; margin-bottom: 52px; font-size: 1rem; }
+  .guide-table-wrap { overflow-x: auto; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+  .guide-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+  .guide-table thead tr { background: linear-gradient(135deg, var(--gold), var(--gold-lt)); }
+  .guide-table thead th { color: var(--navy); font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; padding: 16px 20px; text-align: left; }
+  .guide-table tbody tr { border-bottom: 1px solid rgba(255,255,255,.07); transition: background .2s; }
+  .guide-table tbody tr:last-child { border-bottom: none; }
+  .guide-table tbody tr:hover { background: rgba(244,168,32,.07); }
+  .guide-table td { padding: 18px 20px; vertical-align: middle; color: rgba(255,255,255,.8); font-size: .92rem; }
+  .guide-kw { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--gold); white-space: nowrap; }
+  .guide-units-big { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+  .guide-units-label { font-size: .72rem; color: rgba(255,255,255,.4); letter-spacing: .06em; text-transform: uppercase; }
+  .guide-appliances { display: flex; flex-wrap: wrap; gap: 6px; }
+  .guide-app { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; padding: 4px 10px; font-size: .78rem; color: rgba(255,255,255,.75); white-space: nowrap; }
+  .guide-bill { font-weight: 700; color: var(--gold-lt); font-size: .92rem; }
+  .guide-why { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-top: 52px; }
+  .guide-why-pill { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 100px; padding: 12px 22px; color: var(--white); font-size: .88rem; font-weight: 500; }
+  .guide-why-pill span { font-size: 1.2rem; }
+
+  /* ── ON-GRID SECTION ── */
+  #on-grid { background: var(--off); }
+  .ongrid-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-bottom: 72px; }
+  .ongrid-benefits { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 28px; }
+  .ongrid-benefit { display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--white); border-radius: 14px; padding: 18px 12px; text-align: center; border: 1px solid rgba(11,23,40,.07); box-shadow: 0 4px 16px rgba(11,23,40,.06); }
+  .ongrid-benefit .ob-icon { font-size: 1.6rem; }
+  .ongrid-benefit .ob-label { font-size: .78rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+  .ongrid-img { border-radius: 22px; overflow: hidden; box-shadow: 0 24px 80px rgba(11,23,40,.18); }
+  .ongrid-img img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+  .subsidy-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-bottom: 52px; }
+  .subsidy-card { border-radius: 18px; padding: 28px 24px; text-align: center; position: relative; overflow: hidden; }
+  .subsidy-card-1 { background: linear-gradient(135deg, #1A3058, #122240); border: 2px solid rgba(244,168,32,.25); }
+  .subsidy-card-2 { background: linear-gradient(135deg, #1A3058, #122240); border: 2px solid rgba(244,168,32,.25); }
+  .subsidy-card-3 { background: linear-gradient(135deg, var(--gold-dk), var(--gold)); border: 2px solid transparent; }
+  .subsidy-kw { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  .subsidy-card-3 .subsidy-kw { color: var(--navy); }
+  .subsidy-label { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 20px; }
+  .subsidy-card-3 .subsidy-label { color: rgba(11,23,40,.6); }
+  .subsidy-row { margin-bottom: 14px; }
+  .subsidy-row-label { font-size: .76rem; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
+  .subsidy-card-3 .subsidy-row-label { color: rgba(11,23,40,.55); }
+  .subsidy-amount { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--white); }
+  .subsidy-card-3 .subsidy-amount { color: var(--navy); }
+  .ongrid-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+  .ongrid-savings-box { background: var(--navy); border-radius: 18px; padding: 32px; color: var(--white); }
+  .ongrid-savings-box h3 { color: var(--white); margin-bottom: 16px; font-size: 1.2rem; }
+  .savings-percent { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--gold); line-height: 1; }
+  .savings-desc { color: rgba(255,255,255,.55); font-size: .88rem; margin-top: 8px; }
+  .savings-benefits { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .savings-benefit-item { display: flex; align-items: center; gap: 10px; font-size: .9rem; color: rgba(255,255,255,.8); }
+  .savings-benefit-item::before { content: '✓'; width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: var(--navy); display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; flex-shrink: 0; }
+  .net-metering-box { background: linear-gradient(135deg, var(--sky), var(--sky-lt)); border-radius: 18px; padding: 32px; color: var(--white); }
+  .net-metering-box h3 { color: var(--white); margin-bottom: 10px; }
+  .net-metering-box p { color: rgba(255,255,255,.85); font-size: .92rem; }
+  .payback-badge { margin-top: 20px; background: rgba(255,255,255,.15); border-radius: 12px; padding: 16px 20px; }
+  .payback-badge strong { font-family: 'Playfair Display', serif; font-size: 1.1rem; display: block; margin-bottom: 4px; }
+  .payback-badge span { font-size: .82rem; opacity: .85; }
+  .subsidy-note { text-align: center; font-size: .78rem; color: var(--muted); margin-top: 8px; font-style: italic; }
+
+  @media (max-width: 768px) {
+    .ongrid-hero { grid-template-columns: 1fr; }
+    .subsidy-grid { grid-template-columns: 1fr; }
+    .ongrid-bottom { grid-template-columns: 1fr; }
+    .ongrid-benefits { grid-template-columns: repeat(3,1fr); }
+  }
+
   /* ── NAV ── */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 999; padding: 14px 0; transition: var(--transition); }
   nav.scrolled { background: rgba(11,23,40,.95); backdrop-filter: blur(18px); padding: 10px 0; box-shadow: 0 4px 32px rgba(0,0,0,.25); }
@@ -129,7 +188,7 @@
   .hero-slide-1 { background-image: url('https://res.cloudinary.com/dbnujwodr/image/upload/v1781704467/antonio-garcia-ndz_u1_tFZo-unsplash_nyjb3f.jpg?w=1600&q=80'); }
   .hero-slide-2 { background-image: url('https://res.cloudinary.com/dbnujwodr/image/upload/v1781704149/1324_spi8ig.jpg?w=1600&q=80'); }
   .hero-slide-3 { background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80'); }
-  .hero-slide-4 { background-image: url('https://res.cloudinary.com/dbnujwodr/image/upload/v1781704457/raphael-cruz-IwY-27ceRCA-unsplash_a7a2b5.jpg?w=1600&q=80'); }
+  .hero-slide-4 { background-image: url('https://res.cloudinary.com/dbnujwodr/image/upload/v1781704467/antonio-garcia-ndz_u1_tFZo-unsplash_nyjb3f.jpg?w=1600&q=80'); }
 
   @keyframes kenBurns {
     from { transform: scale(1); }
@@ -243,11 +302,15 @@
   }
   body.night-mode #installations { background: #0a1520; }
   body.night-mode #brands { background: #0a1520; }
+  body.night-mode #on-grid { background: #0a1520; }
+  body.night-mode .ongrid-benefit { background: #0d1e33; border-color: rgba(255,255,255,.07); }
+  body.night-mode .ongrid-benefit .ob-label { color: #c8d8f0; }
+  body.night-mode .subsidy-note { color: #7090b8; }
   body.night-mode .install-name { color: #e8f0ff; }
   body.night-mode .install-addr,
   body.night-mode .install-desc { color: #9bb0d4; }
-  body.night-mode .brand-wordmark { opacity: .6; filter: grayscale(1) brightness(1.6); }
-  body.night-mode .brand-wordmark:hover { opacity: 1; filter: grayscale(0) brightness(1); }
+  body.night-mode .brand-wordmark { opacity: .95; filter: grayscale(0) brightness(1.35) saturate(1.2); }
+  body.night-mode .brand-wordmark:hover { opacity: 1; filter: grayscale(0) brightness(1.5) saturate(1.4); }
   body.night-mode .bw-sub { color: #7090b8; }
   body.night-mode .why-badge-float,
   body.night-mode .team-card { background: #0d1e33; }
@@ -383,10 +446,10 @@
   #brands { background: var(--white); padding: 56px 0; overflow: hidden; }
   .brands-label { text-align: center; font-size: .82rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 36px; }
   .brand-marquee { position: relative; width: 100%; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-  .brand-track { display: flex; gap: 72px; width: max-content; animation: brandScroll 30s linear infinite; align-items: center; }
+  .brand-track { display: flex; gap: 72px; width: max-content; animation: brandScroll 48s linear infinite; align-items: center; }
   .brand-marquee:hover .brand-track { animation-play-state: paused; }
-  .brand-wordmark { white-space: nowrap; display: flex; flex-direction: column; align-items: center; opacity: .5; filter: grayscale(1); transition: opacity .3s, filter .3s, transform .3s; cursor: default; }
-  .brand-wordmark:hover { opacity: 1; filter: grayscale(0); transform: translateY(-2px); }
+  .brand-wordmark { white-space: nowrap; display: flex; flex-direction: column; align-items: center; opacity: .92; filter: grayscale(0) saturate(1.15); transition: opacity .3s, filter .3s, transform .3s; cursor: default; }
+  .brand-wordmark:hover { opacity: 1; filter: grayscale(0) saturate(1.35); transform: translateY(-2px) scale(1.04); }
   .brand-wordmark .bw-main { font-size: 1.5rem; line-height: 1; }
   .brand-wordmark .bw-sub { font-size: .62rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
   /* Per-brand logotype styling */
@@ -600,6 +663,8 @@
     <ul class="nav-links">
       <li><a href="#why">Why Solar</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#solar-guide">Size Guide</a></li>
+      <li><a href="#on-grid">On-Grid</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#products">Products</a></li>
       <li><a href="#team">Our Team</a></li>
@@ -617,6 +682,8 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="#why" onclick="closeMobile()">Why Solar</a>
   <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#solar-guide" onclick="closeMobile()">Size Guide</a>
+  <a href="#on-grid" onclick="closeMobile()">On-Grid System</a>
   <a href="#process" onclick="closeMobile()">How It Works</a>
   <a href="#products" onclick="closeMobile()">Products</a>
   <a href="#team" onclick="closeMobile()">Our Team</a>
@@ -803,6 +870,241 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SOLAR SIZE GUIDE ═══════════════ -->
+<section id="solar-guide" class="section">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">System Size Guide</div>
+      <h2 class="section-title" style="color:var(--white)">How Much kW Solar Is Right For Your Home?</h2>
+      <p class="guide-subtitle">A complete guide to smart solar choices — find the perfect system for your energy needs and budget.</p>
+    </div>
+
+    <div class="guide-table-wrap">
+      <table class="guide-table">
+        <thead>
+          <tr>
+            <th>System Size</th>
+            <th>Daily Generation</th>
+            <th>Monthly Generation</th>
+            <th>What Will It Run?</th>
+            <th>Best For (Monthly Bill)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="guide-kw">3 kW</div><div class="guide-units-label">Solar System</div></td>
+            <td><div class="guide-units-big">15</div><div class="guide-units-label">Units/Day</div></td>
+            <td><div class="guide-units-big">450</div><div class="guide-units-label">Units/Month</div></td>
+            <td>
+              <div class="guide-appliances">
+                <span class="guide-app">❄️ 1 AC (6 hrs)</span>
+                <span class="guide-app">🌀 2–3 Fans</span>
+                <span class="guide-app">📺 TV</span>
+                <span class="guide-app">🧊 Fridge</span>
+                <span class="guide-app">💡 Lights</span>
+                <span class="guide-app">💧 Water Pump</span>
+                <span class="guide-app">🌬️ Cooler</span>
+                <span class="guide-app">🫧 Washing Machine</span>
+              </div>
+            </td>
+            <td><div class="guide-bill">₹2,000 – ₹3,000</div></td>
+          </tr>
+          <tr>
+            <td><div class="guide-kw">5 kW</div><div class="guide-units-label">Solar System</div></td>
+            <td><div class="guide-units-big">25</div><div class="guide-units-label">Units/Day</div></td>
+            <td><div class="guide-units-big">750</div><div class="guide-units-label">Units/Month</div></td>
+            <td>
+              <div class="guide-appliances">
+                <span class="guide-app">❄️ 1–2 AC (6 hrs)</span>
+                <span class="guide-app">🌀 3–4 Fans</span>
+                <span class="guide-app">📺 TV</span>
+                <span class="guide-app">🧊 Fridge</span>
+                <span class="guide-app">💡 Lights</span>
+                <span class="guide-app">💧 Water Pump</span>
+                <span class="guide-app">🌬️ Cooler</span>
+                <span class="guide-app">🫧 Washing Machine</span>
+                <span class="guide-app">🚿 Geyser</span>
+              </div>
+            </td>
+            <td><div class="guide-bill">₹4,000 – ₹6,000</div></td>
+          </tr>
+          <tr>
+            <td><div class="guide-kw">6 kW</div><div class="guide-units-label">Solar System</div></td>
+            <td><div class="guide-units-big">30</div><div class="guide-units-label">Units/Day</div></td>
+            <td><div class="guide-units-big">900</div><div class="guide-units-label">Units/Month</div></td>
+            <td>
+              <div class="guide-appliances">
+                <span class="guide-app">❄️ 2 AC (6 hrs)</span>
+                <span class="guide-app">🌀 4–5 Fans</span>
+                <span class="guide-app">📺 TV</span>
+                <span class="guide-app">🧊 Fridge</span>
+                <span class="guide-app">💡 Lights</span>
+                <span class="guide-app">💧 Water Pump</span>
+                <span class="guide-app">🌬️ Cooler</span>
+                <span class="guide-app">🫧 Washing Machine</span>
+                <span class="guide-app">🚿 Geyser</span>
+                <span class="guide-app">🪣 Iron</span>
+              </div>
+            </td>
+            <td><div class="guide-bill">₹6,000 – ₹8,000</div></td>
+          </tr>
+          <tr>
+            <td><div class="guide-kw">8 kW</div><div class="guide-units-label">Solar System</div></td>
+            <td><div class="guide-units-big">40</div><div class="guide-units-label">Units/Day</div></td>
+            <td><div class="guide-units-big">1,200</div><div class="guide-units-label">Units/Month</div></td>
+            <td>
+              <div class="guide-appliances">
+                <span class="guide-app">❄️ 2–3 AC (6 hrs)</span>
+                <span class="guide-app">🌀 5–6 Fans</span>
+                <span class="guide-app">📺 TV</span>
+                <span class="guide-app">🧊 Fridge</span>
+                <span class="guide-app">💡 Lights</span>
+                <span class="guide-app">💧 Water Pump</span>
+                <span class="guide-app">🌬️ Cooler</span>
+                <span class="guide-app">🫧 Washing Machine</span>
+                <span class="guide-app">🚿 Geyser ×3</span>
+                <span class="guide-app">🍽️ Dishwasher</span>
+                <span class="guide-app">🪣 Iron</span>
+              </div>
+            </td>
+            <td><div class="guide-bill">₹8,000 – ₹12,000</div></td>
+          </tr>
+          <tr>
+            <td><div class="guide-kw">10 kW</div><div class="guide-units-label">Solar System</div></td>
+            <td><div class="guide-units-big">50</div><div class="guide-units-label">Units/Day</div></td>
+            <td><div class="guide-units-big">1,500</div><div class="guide-units-label">Units/Month</div></td>
+            <td>
+              <div class="guide-appliances">
+                <span class="guide-app">❄️ 3–4 AC (6 hrs)</span>
+                <span class="guide-app">🌀 6–8 Fans</span>
+                <span class="guide-app">📺 TV</span>
+                <span class="guide-app">🧊 Fridge</span>
+                <span class="guide-app">💡 Lights</span>
+                <span class="guide-app">💧 Water Pump</span>
+                <span class="guide-app">🌬️ Cooler</span>
+                <span class="guide-app">🫧 Washing Machine</span>
+                <span class="guide-app">🚿 Geyser ×3</span>
+                <span class="guide-app">🍽️ Dishwasher</span>
+                <span class="guide-app">📡 Microwave</span>
+                <span class="guide-app">🪣 Iron</span>
+              </div>
+            </td>
+            <td><div class="guide-bill">₹12,000+</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="guide-why">
+      <div class="guide-why-pill"><span>⚡</span> Lower Electricity Bills</div>
+      <div class="guide-why-pill"><span>🌱</span> Clean &amp; Green Energy</div>
+      <div class="guide-why-pill"><span>🏠</span> Increases Property Value</div>
+      <div class="guide-why-pill"><span>🏛️</span> Government Subsidy Available</div>
+      <div class="guide-why-pill"><span>🔋</span> Energy Independence</div>
+    </div>
+    <p style="text-align:center;margin-top:18px;font-size:.78rem;color:rgba(255,255,255,.35);">* Power generation may vary based on location, sunlight &amp; usage patterns.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ ON-GRID SOLAR SYSTEM ═══════════════ -->
+<section id="on-grid" class="section">
+  <div class="container">
+
+    <!-- Hero intro -->
+    <div class="ongrid-hero">
+      <div>
+        <div class="section-tag">Solar On-Grid System</div>
+        <h2 class="section-title">Clean Energy. Lower Bills.<br>Better Tomorrow.</h2>
+        <p>Generate your own electricity and save every month! Our on-grid solar systems connect directly to the power grid, letting you send excess energy back and earn credits through net metering.</p>
+        <div class="ongrid-benefits">
+          <div class="ongrid-benefit"><div class="ob-icon">🏛️</div><div class="ob-label">Government Subsidy Available</div></div>
+          <div class="ongrid-benefit"><div class="ob-icon">💸</div><div class="ob-label">Lower Electricity Bills</div></div>
+          <div class="ongrid-benefit"><div class="ob-icon">🌿</div><div class="ob-label">Clean &amp; Green Energy</div></div>
+          <div class="ongrid-benefit"><div class="ob-icon">🛡️</div><div class="ob-label">Reliable &amp; Low Maintenance</div></div>
+          <div class="ongrid-benefit"><div class="ob-icon">📅</div><div class="ob-label">Long Term Savings</div></div>
+          <div class="ongrid-benefit"><div class="ob-icon">✅</div><div class="ob-label">Hassle Free &amp; Easy Process</div></div>
+        </div>
+      </div>
+      <div class="ongrid-img">
+        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=800&q=80" alt="Solar on-grid rooftop system" loading="lazy" />
+      </div>
+    </div>
+
+    <!-- Government Subsidy Cards -->
+    <div style="text-align:center;margin-bottom:32px;">
+      <div class="section-tag">Government Subsidy Available*</div>
+      <h3 class="section-title" style="font-size:1.6rem;">Save Up to ₹78,000 with PM Surya Ghar Subsidy</h3>
+    </div>
+    <div class="subsidy-grid">
+      <div class="subsidy-card subsidy-card-1">
+        <div class="subsidy-kw">1 kW</div>
+        <div class="subsidy-label">System Size</div>
+        <div class="subsidy-row">
+          <div class="subsidy-row-label">Subsidy</div>
+          <div class="subsidy-amount">₹30,000/-</div>
+        </div>
+        <div class="subsidy-row">
+          <div class="subsidy-row-label">You Save Up To</div>
+          <div class="subsidy-amount">₹30,000/-</div>
+        </div>
+      </div>
+      <div class="subsidy-card subsidy-card-2">
+        <div class="subsidy-kw">2 kW</div>
+        <div class="subsidy-label">System Size</div>
+        <div class="subsidy-row">
+          <div class="subsidy-row-label">Subsidy</div>
+          <div class="subsidy-amount">₹60,000/-</div>
+        </div>
+        <div class="subsidy-row">
+          <div class="subsidy-row-label">You Save Up To</div>
+          <div class="subsidy-amount">₹60,000/-</div>
+        </div>
+      </div>
+      <div class="subsidy-card subsidy-card-3">
+        <div class="subsidy-kw">3 kW</div>
+        <div class="subsidy-label">System Size</div>
+        <div class="subsidy-row">
+          <div class="subsidy-row-label">Subsidy</div>
+          <div class="subsidy-amount">₹78,000/-</div>
+        </div>
+        <div class="subsidy-row">
+          <div class="subsidy-row-label">You Save Up To</div>
+          <div class="subsidy-amount">₹78,000/-</div>
+        </div>
+      </div>
+    </div>
+    <p class="subsidy-note">*Subsidy as per MNRE Guidelines. Subject to eligibility &amp; applicable conditions. We handle the entire application on your behalf.</p>
+
+    <!-- Savings & Net Metering -->
+    <div class="ongrid-bottom" style="margin-top:48px;">
+      <div class="ongrid-savings-box">
+        <h3>⚡ Electrical Bill Savings</h3>
+        <div class="savings-percent">Up to 90%</div>
+        <div class="savings-desc">savings on your monthly electricity bill with solar.</div>
+        <div class="savings-benefits">
+          <div class="savings-benefit-item">Invest once, save for 25+ years</div>
+          <div class="savings-benefit-item">Increase your property value</div>
+          <div class="savings-benefit-item">Achieve energy independence</div>
+          <div class="savings-benefit-item">Hedge against rising electricity tariffs</div>
+          <div class="savings-benefit-item">Environment-friendly &amp; carbon-neutral</div>
+        </div>
+      </div>
+      <div class="net-metering-box">
+        <h3>🔁 Net Metering Benefit</h3>
+        <p>Extra power generated by your solar panels is automatically sent back to the grid — and you earn credits on your electricity bill. Your meter runs backwards!</p>
+        <div class="payback-badge">
+          <strong>⚡ Quick Payback · High Returns</strong>
+          <span>Typically payback in 3–5 years, then enjoy free electricity for 20+ years to come.</span>
+        </div>
+        <div style="margin-top:16px;">
+          <a href="#query" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px;">Get Free Site Survey ➔</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
